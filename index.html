@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZANCUDO DIVISION | UCMJ</title>
+    <title>ZANCUDO DIVISION | UCMJ FULL DATABASE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono&display=swap');
         body { background: #05070a; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; }
         .font-mil { font-family: 'Orbitron', sans-serif; }
-        .ucmj-card { border-left: 3px solid #b45309; background: rgba(15, 23, 42, 0.6); transition: 0.2s; cursor: pointer; }
+        .ucmj-card { border-left: 3px solid #b45309; background: rgba(15, 23, 42, 0.6); transition: 0.2s; cursor: pointer; margin-bottom: 0.5rem; }
         .ucmj-card:hover { background: rgba(180, 83, 9, 0.1); border-left-width: 8px; }
         .content-hidden { display: none; }
-        .content-visible { display: block; }
+        .section-title { color: #b45309; border-bottom: 1px solid #b45309; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; font-size: 0.8rem; font-weight: bold; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -22,84 +22,122 @@
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <div>
                 <h1 class="font-mil text-3xl text-amber-600 tracking-tighter italic">ZANCUDO DIVISION</h1>
-                <p class="text-[10px] text-amber-900 font-bold uppercase tracking-[0.5em]">UCMJ Database / Restricted Access</p>
+                <p class="text-[10px] text-amber-900 font-bold uppercase tracking-[0.5em]">UCMJ FULL ARCHIVE / SECURE</p>
             </div>
             <div class="mt-4 md:mt-0 relative">
-                <input type="text" id="search" placeholder="RECHERCHER UN ARTICLE..." 
-                       class="bg-black border border-amber-900/50 rounded-none py-2 px-10 text-amber-500 focus:border-amber-500 outline-none w-80">
-                <i class="fas fa-search absolute left-3 top-3 text-amber-900/50"></i>
+                <input type="text" id="search" placeholder="RECHERCHER UN ARTICLE OU UN MOT..." 
+                       class="bg-black border border-amber-900/50 rounded-none py-2 px-10 text-amber-500 focus:border-amber-500 outline-none w-80 text-xs">
+                <i class="fas fa-search absolute left-3 top-3 text-amber-900/50 text-xs"></i>
             </div>
         </div>
     </header>
 
     <main class="container mx-auto py-10 px-6">
-        <div id="articles-list" class="grid gap-4">
+        <div id="articles-list">
             </div>
     </main>
 
     <script>
-        // LA LISTE COMPLÈTE DES CODES UCMJ
         const ucmjData = [
-            // I. GENERAL PROVISIONS
-            { id: 1, t: "Definitions", d: "Définition des termes : Officier, Juge-Avocat, Accusateur, etc." },
-            { id: 2, t: "Persons Subject to this Chapter", d: "Membres des forces armées, réservistes en service, prisonniers de guerre." },
-            { id: 3, t: "Jurisdiction to Try Certain Persons", d: "Compétence pour juger les personnes ayant quitté le service pour des crimes commis pendant le service." },
-            { id: 4, t: "Dismissal of Commissioned Officer", d: "Droit à un procès en cour martiale après un renvoi par ordre présidentiel." },
-            { id: 5, t: "Territorial Applicability", d: "L'UCMJ s'applique en tout lieu (USA et étranger)." },
-            { id: 6, t: "Judge Advocates", d: "Attributions et inspections par les officiers juridiques." },
+            // PART I TO IX (PROCEDURE)
+            { id: 1, s: "GENERAL", t: "Definitions", d: "Termes officiels : Officier, Juge-Avocat, Accusateur." },
+            { id: 2, s: "GENERAL", t: "Persons Subject to this Chapter", d: "Militaires actifs, réservistes, prisonniers de guerre." },
+            { id: 3, s: "GENERAL", t: "Jurisdiction to Try Certain Persons", d: "Compétence après la fin de service." },
+            { id: 5, s: "GENERAL", t: "Territorial Applicability", d: "S'applique partout dans le monde." },
+            { id: 7, s: "APPREHENSION", t: "Apprehension", d: "Pouvoir d'arrestation des suspects." },
+            { id: 15, s: "NJP", t: "Non-Judicial Punishment", d: "Sanctions administratives (Article 15)." },
+            { id: 16, s: "COURTS", t: "Courts-martial classified", d: "Types de tribunaux : General, Special, Summary." },
 
-            // II. APPREHENSION AND RESTRAINT
-            { id: 7, t: "Apprehension", d: "Droit d'arrestation des suspects de crimes militaires." },
-            { id: 8, t: "Apprehension of Deserters", d: "Pouvoir des civils mandatés pour arrêter les déserteurs." },
-            { id: 9, t: "Imposition of Restraint", d: "Arrestation ou confinement des suspects." },
-            { id: 10, t: "Restraint of Persons Charged", d: "Procédures immédiates pour informer le suspect des charges contre lui." },
-            { id: 13, t: "Punishment Prohibited Before Trial", d: "Interdiction de punir un suspect avant son procès (sauf garde à vue)." },
+            // PART X - PUNITIVE ARTICLES (77-134)
+            { id: 77, s: "PUNITIVE", t: "Principals", d: "Responsabilité des auteurs et complices." },
+            { id: 78, s: "PUNITIVE", t: "Accessory after the fact", d: "Complicité après les faits." },
+            { id: 80, s: "PUNITIVE", t: "Attempts", d: "Tentatives d'infractions." },
+            { id: 81, s: "PUNITIVE", t: "Conspiracy", d: "Complot entre deux personnes ou plus." },
+            { id: 82, s: "PUNITIVE", t: "Solicitation", d: "Incitation à la désertion ou mutinerie." },
+            { id: 83, s: "PUNITIVE", t: "Fraudulent enlistment", d: "Engagement par tromperie." },
+            { id: 85, s: "PUNITIVE", t: "Desertion", d: "Abandon définitif de l'unité." },
+            { id: 86, s: "PUNITIVE", t: "AWOL", d: "Absence sans permission / Manque à l'appel." },
+            { id: 87, s: "PUNITIVE", t: "Missing movement", d: "Manquer le départ d'un navire ou avion." },
+            { id: 88, s: "PUNITIVE", t: "Contempt toward officials", d: "Mépris envers les élus civils." },
+            { id: 89, s: "PUNITIVE", t: "Disrespect toward superior officer", d: "Manque de respect envers un officier." },
+            { id: 90, s: "PUNITIVE", t: "Assault / Disobeying officer", d: "Agression ou désobéissance volontaire." },
+            { id: 91, s: "PUNITIVE", t: "Insubordinate conduct", d: "Insubordination envers un NCO ou adjudant." },
+            { id: 92, s: "PUNITIVE", t: "Failure to obey order", d: "Violation de règlement ou dérive de fonction." },
+            { id: 93, s: "PUNITIVE", t: "Cruelty and maltreatment", d: "Mauvais traitements envers subordonnés." },
+            { id: 94, s: "PUNITIVE", t: "Mutiny or sedition", d: "Révolte collective contre l'autorité." },
+            { id: 95, s: "PUNITIVE", t: "Resistance / Breach of arrest", d: "Évasion ou résistance lors d'une arrestation." },
+            { id: 99, s: "PUNITIVE", t: "Misbehavior before the enemy", d: "Lâcheté ou faute grave au combat." },
+            { id: 104, s: "PUNITIVE", t: "Aiding the enemy", d: "Assistance directe à l'ennemi." },
+            { id: 106, s: "PUNITIVE", t: "Spies", d: "Espionnage (Temps de guerre)." },
+            { id: 107, s: "PUNITIVE", t: "False official statements", d: "Mensonges dans les rapports officiels." },
+            { id: 108, s: "PUNITIVE", t: "Loss / Damage military property", d: "Vente ou destruction de matériel militaire." },
+            { id: 109, s: "PUNITIVE", t: "Waste / Destruction of other property", d: "Dommages aux biens civils." },
+            { id: 111, s: "PUNITIVE", t: "Drunken or reckless operation", d: "Conduite dangereuse de véhicules." },
+            { id: 112, s: "PUNITIVE", t: "Drunk on duty", d: "Ivresse en service." },
+            { id: 112, t: "Controlled substances", d: "Usage ou trafic de drogues." },
+            { id: 113, s: "PUNITIVE", t: "Misbehavior of sentinel", d: "Sentinelle endormie ou ivre." },
+            { id: 115, s: "PUNITIVE", t: "Malingering", d: "Feindre une maladie pour éviter le service." },
+            { id: 116, s: "PUNITIVE", t: "Riot or breach of peace", d: "Participation à une émeute." },
+            { id: 117, s: "PUNITIVE", t: "Provoking speeches", d: "Gestes ou paroles provocatrices." },
+            { id: 118, s: "PUNITIVE", t: "Murder", d: "Homicide volontaire." },
+            { id: 119, s: "PUNITIVE", t: "Manslaughter", d: "Homicide involontaire." },
+            { id: 120, s: "PUNITIVE", t: "Rape / Sexual assault", d: "Viol et agressions sexuelles." },
+            { id: 121, s: "PUNITIVE", t: "Larceny", d: "Vol et détournement de biens." },
+            { id: 122, s: "PUNITIVE", t: "Robbery", d: "Vol avec violence." },
+            { id: 123, s: "PUNITIVE", t: "Forgery", d: "Faux et usage de faux." },
+            { id: 128, s: "PUNITIVE", t: "Assault", d: "Agression ou tentative d'agression." },
+            { id: 129, s: "PUNITIVE", t: "Burglary", d: "Cambriolage." },
+            { id: 131, s: "PUNITIVE", t: "Perjury", d: "Faux témoignage sous serment." },
+            { id: 132, s: "PUNITIVE", t: "Fraud against the US", d: "Fraude contre le gouvernement." },
+            { id: 133, s: "PUNITIVE", t: "Conduct unbecoming an officer", d: "Conduite indigne d'un officier." },
+            { id: 134, s: "PUNITIVE", t: "General Article", d: "Désordres nuisant à la discipline." },
 
-            // III. NON-JUDICIAL PUNISHMENT
-            { id: 15, t: "Commanding Officer's NJP", d: "L'Article 15 : Sanctions disciplinaires imposées sans cour martiale." },
-
-            // X. PUNITIVE ARTICLES (LES CRIMES)
-            { id: 77, t: "Principals", d: "Responsabilité de ceux qui aident ou ordonnent un crime." },
-            { id: 78, t: "Accessory After the Fact", d: "Complicité après les faits pour aider un criminel à s'échapper." },
-            { id: 80, t: "Attempts", d: "Tentative de commettre une infraction." },
-            { id: 81, t: "Conspiracy", d: "Conspiration : Accord entre deux personnes ou plus pour commettre un crime." },
-            { id: 82, t: "Solicitation", d: "Inciter autrui à déserter ou à se mutiner." },
-            { id: 83, t: "Fraudulent Enlistment", d: "Engagement dans l'armée par mensonge ou tromperie." },
-            { id: 85, t: "Desertion", d: "Abandon de poste avec l'intention de ne pas revenir." },
-            { id: 86, t: "Absence Without Leave (AWOL)", d: "Manquement à l'appel. Absence non autorisée." },
-            { id: 87, t: "Missing Movement", d: "Manquer le départ d'un navire, avion ou unité." },
-            { id: 88, t: "Contempt Toward Officials", d: "Paroles méprisantes contre les autorités civiles (Président, Congrès)." },
-            { id: 89, t: "Disrespect Toward Superior Officer", d: "Comportement irrespectueux envers un officier." },
-            { id: 90, t: "Assaulting / Disobeying Officer", d: "Agression ou désobéissance volontaire à un ordre légitime." },
-            { id: 91, t: "Insubordinate Conduct", d: "Insubordination envers un adjudant ou sous-officier (NCO)." },
-            { id: 92, t: "Failure to Obey Order", d: "Violation d'un règlement général ou d'un ordre (Art. le plus courant)." },
-            { id: 93, t: "Cruelty and Maltreatment", d: "Cruauté ou mauvais traitements envers des subordonnés." },
-            { id: 94, t: "Mutiny and Sedition", d: "Révolte collective contre l'autorité militaire." },
-            { id: 95, t: "Resistance, Breach of Arrest", d: "Résistance à une arrestation ou évasion d'une cellule." },
-            { id: 99, t: "Misbehavior Before the Enemy", d: "Lâcheté, abandon de poste ou reddition injustifiée devant l'ennemi." },
-            { id: 104, t: "Aiding the Enemy", d: "Fournir des armes, des infos ou de l'aide à l'ennemi." },
-            { id: 106, t: "Spies", d: "Espionnage (passible de la peine de mort en temps de guerre)." },
-            { id: 107, t: "False Official Statements", d: "Déclarations officielles mensongères." },
-            { id: 108, t: "Loss / Damage Military Property", d: "Vente, perte ou destruction de matériel militaire." },
-            { id: 112, t: "Drunk on Duty", d: "Ivresse en service." },
-            { id: 112, t: "Controlled Substances", d: "Usage, possession ou trafic de drogue." },
-            { id: 113, t: "Misbehavior of Sentinel", d: "Sentinelle endormie ou ivre à son poste." },
-            { id: 115, t: "Malingering", d: "Feindre une maladie ou se blesser pour éviter le service." },
-            { id: 116, t: "Riot or Breach of Peace", d: "Participation à une émeute ou trouble à l'ordre public." },
-            { id: 117, t: "Provoking Speeches", d: "Utilisation de gestes ou paroles provocatrices." },
-            { id: 118, t: "Murder", d: "Meurtre." },
-            { id: 119, t: "Manslaughter", d: "Homicide involontaire." },
-            { id: 120, t: "Rape / Sexual Assault", d: "Viol et agressions sexuelles." },
-            { id: 121, t: "Larceny", d: "Vol et appropriation illicite." },
-            { id: 124, t: "Frauds Against the US", d: "Fraude financière contre le gouvernement." },
-            { id: 128, t: "Assault", d: "Agression physique." },
-            { id: 133, t: "Conduct Unbecoming an Officer", d: "Conduite indigne d'un officier et d'un gentleman." },
-            { id: 134, t: "General Article", d: "L'article fourre-tout : tout ce qui nuit à la discipline ou porte discrédit." }
+            // PART XI - MISC
+            { id: 135, s: "MISC", t: "Courts of inquiry", d: "Mise en place de commissions d'enquête." },
+            { id: 137, s: "MISC", t: "Articles to be explained", d: "Obligation d'expliquer le code aux soldats." },
+            { id: 138, s: "MISC", t: "Complaints of wrongs", d: "Droit de recours contre un supérieur." }
         ];
 
         const list = document.getElementById('articles-list');
+        const searchInput = document.getElementById('search');
 
         function render(data) {
             list.innerHTML = '';
+            let currentSec = "";
             data.forEach(a => {
-                const div = document
+                if(a.s !== currentSec) {
+                    const sec = document.createElement('div');
+                    sec.className = "section-title font-mil";
+                    sec.innerText = `CHAPTER // ${a.s}`;
+                    list.appendChild(sec);
+                    currentSec = a.s;
+                }
+                const card = document.createElement('div');
+                card.className = "ucmj-card p-4 rounded-sm shadow-xl";
+                card.onclick = () => card.querySelector('.desc').classList.toggle('content-hidden');
+                card.innerHTML = `
+                    <div class="flex justify-between items-center text-xs md:text-sm">
+                        <div class="flex items-center gap-4">
+                            <span class="font-mil text-amber-600">#${a.id}</span>
+                            <h2 class="font-bold uppercase tracking-widest">${a.t}</h2>
+                        </div>
+                        <i class="fas fa-plus text-amber-900"></i>
+                    </div>
+                    <div class="desc content-hidden mt-4 pt-4 border-t border-amber-900/10 text-slate-400 text-xs italic leading-relaxed">
+                        "${a.d}"
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            const v = e.target.value.toLowerCase();
+            const f = ucmjData.filter(x => x.t.toLowerCase().includes(v) || x.id.toString().includes(v) || x.d.toLowerCase().includes(v));
+            render(f);
+        });
+
+        render(ucmjData);
+    </script>
+</body>
+</html>
