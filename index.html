@@ -1,119 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zancudo Division | UCMJ Full Database</title>
+    <title>ZANCUDO DIVISION | UCMJ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap');
-        
-        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; }
-        .font-military { font-family: 'Orbitron', sans-serif; }
-        .article-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-        .article-card.active .article-content { max-height: 1000px; padding-top: 1rem; }
-        .article-card.active i.fa-chevron-down { transform: rotate(180deg); }
-        .gold-glow { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono&display=swap');
+        body { background: #05070a; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; }
+        .font-mil { font-family: 'Orbitron', sans-serif; }
+        .ucmj-card { border-left: 3px solid #b45309; background: rgba(15, 23, 42, 0.6); transition: 0.2s; cursor: pointer; }
+        .ucmj-card:hover { background: rgba(180, 83, 9, 0.1); border-left-width: 8px; }
+        .content-hidden { display: none; }
+        .content-visible { display: block; }
     </style>
 </head>
-<body class="min-h-screen bg-[radial-gradient(ellipse_at_top,_#1e293b_0%,_#020617_100%)]">
+<body class="min-h-screen">
 
-    <nav class="border-b border-amber-900/30 bg-black/40 backdrop-blur-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0">
-                <h1 class="font-military text-2xl font-bold text-amber-500 tracking-widest gold-glow">ZANCUDO DIVISION</h1>
-                <p class="text-[10px] text-slate-500 tracking-[0.5em] uppercase">Unified Code of Military Justice</p>
+    <header class="border-b border-amber-900/30 bg-black/80 p-6 sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <h1 class="font-mil text-3xl text-amber-600 tracking-tighter italic">ZANCUDO DIVISION</h1>
+                <p class="text-[10px] text-amber-900 font-bold uppercase tracking-[0.5em]">UCMJ Database / Restricted Access</p>
             </div>
-            <div class="relative w-full md:w-96">
-                <i class="fas fa-search absolute left-4 top-3 text-amber-900/50"></i>
-                <input type="text" id="searchInput" placeholder="Rechercher (Art. 92, Desertion...)" 
-                       class="w-full bg-slate-900/50 border border-amber-900/30 rounded-full py-2 pl-12 pr-4 text-sm focus:outline-none focus:border-amber-500 transition-all">
+            <div class="mt-4 md:mt-0 relative">
+                <input type="text" id="search" placeholder="RECHERCHER UN ARTICLE..." 
+                       class="bg-black border border-amber-900/50 rounded-none py-2 px-10 text-amber-500 focus:border-amber-500 outline-none w-80">
+                <i class="fas fa-search absolute left-3 top-3 text-amber-900/50"></i>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="container mx-auto px-4 py-10 max-w-5xl">
-        
-        <div class="mb-8 border-l-4 border-amber-600 pl-4">
-            <h2 class="text-xl font-bold uppercase tracking-wider">Base de données complète</h2>
-            <p class="text-sm text-slate-400">Cliquez sur un article pour voir les détails et sanctions.</p>
-        </div>
-
-        <div id="articlesContainer" class="space-y-3">
+    <main class="container mx-auto py-10 px-6">
+        <div id="articles-list" class="grid gap-4">
             </div>
-
     </main>
 
     <script>
-        // LA BASE DE DONNÉES COMPLÈTE (Échantillon structuré - Ajoutez le reste ici)
-        const ucmjDatabase = [
-            { id: 1, title: "Definitions", cat: "General", text: "Definitions of terms used in the UCMJ, including Judge Advocate, Officer, and Accuser." },
-            { id: 15, title: "Non-Judicial Punishment (NJP)", cat: "Administrative", text: "Gives commanders the authority to impose disciplinary punishments for minor offenses without a court-martial." },
-            { id: 77, title: "Principals", cat: "Punitive", text: "Any person who commits an offense, or aids, abets, counsels, commands, or procures its commission." },
-            { id: 85, title: "Desertion", cat: "Punitive", text: "Any member of the armed forces who, without authority, goes or remains absent from his unit with the intent to remain away permanently." },
-            { id: 86, title: "Absence Without Leave (AWOL)", cat: "Punitive", text: "Failure to go to the appointed place of duty at the time prescribed, or leaving that place without authority." },
-            { id: 87, title: "Missing Movement", cat: "Punitive", text: "Missing the movement of a ship, aircraft, or unit through neglect or design." },
-            { id: 88, title: "Contempt Toward Officials", cat: "Punitive", text: "Using contemptuous words against the President, Vice President, Congress, or other high officials." },
-            { id: 89, title: "Disrespect Toward Superior Commissioned Officer", cat: "Punitive", text: "Behaving with disrespect toward a superior commissioned officer." },
-            { id: 90, title: "Assaulting or Willfully Disobeying Superior Commissioned Officer", cat: "Punitive", text: "Striking a superior commissioned officer or willfully disobeying a lawful command." },
-            { id: 91, title: "Insubordinate Conduct Toward Warrant/Non-commissioned Officer", cat: "Punitive", text: "Disrespect or disobedience toward a warrant officer, noncommissioned officer, or petty officer." },
-            { id: 92, title: "Failure to Obey Order or Regulation", cat: "Punitive", text: "Violating or failing to obey any lawful general order or regulation; dereliction of duty." },
-            { id: 107, title: "False Official Statements", cat: "Punitive", text: "Signing any false record, return, regulation, or other official document with intent to deceive." },
-            { id: 112, title: "Drunk on Duty", cat: "Punitive", text: "Being found drunk while on duty, other than as a sentinel or lookout." },
-            { id: 133, title: "Conduct Unbecoming an Officer and a Gentleman", cat: "Punitive", text: "Any commissioned officer, cadet, or midshipman convicted of conduct unbecoming an officer and a gentleman shall be punished." },
-            { id: 134, title: "General Article", cat: "Punitive", text: "All disorders and neglects to the prejudice of good order and discipline, or conduct of a nature to bring discredit upon the armed forces." }
+        // LA LISTE COMPLÈTE DES CODES UCMJ
+        const ucmjData = [
+            { id: 1, t: "Definitions", d: "Définitions des termes officiels : Officier, Juge-Avocat, Accusateur." },
+            { id: 2, t: "Persons Subject to UCMJ", d: "Liste des personnes soumises au code (Actifs, Réservistes, Prisonniers de guerre)." },
+            { id: 7, t: "Apprehension", d: "Le droit d'appréhender des personnes suspectées d'infractions." },
+            { id: 15, t: "Non-Judicial Punishment (NJP)", d: "Punitions administratives sans cour martiale. Sanctions de commandement." },
+            { id: 77, t: "Principals", d: "Toute personne qui commet, aide ou conseille un crime est responsable comme auteur principal." },
+            { id: 85, t: "Desertion", d: "Abandon de son unité avec l'intention de ne pas y retourner." },
+            { id: 86, t: "AWOL (Absence Without Leave)", d: "Manque à l'appel. Absence de son lieu de service sans autorisation." },
+            { id: 87, t: "Missing Movement", d: "Manquer le départ d'un navire, avion ou unité par négligence ou intention." },
+            { id: 89, t: "Disrespect Toward Superior Officer", d: "Comportement irrespectueux envers un officier supérieur." },
+            { id: 90, t: "Assault / Disobeying Superior Officer", d: "Frapper un officier supérieur ou désobéir volontairement à un ordre direct." },
+            { id: 91, t: "Insubordinate Conduct", d: "Insubordination envers un sous-officier ou un adjudant." },
+            { id: 92, t: "Failure to Obey Order", d: "Violation d'un règlement général ou d'un ordre légitime. Dérive de fonction." },
+            { id: 107, t: "False Official Statements", d: "Signature de documents faux ou déclarations mensongères avec intention de tromper." },
+            { id: 112, t: "Drunk on Duty", d: "Être ivre ou sous influence pendant le service." },
+            { id: 121, t: "Larceny / Wrongful Appropriation", d: "Vol ou utilisation non autorisée de la propriété d'autrui ou du gouvernement." },
+            { id: 133, t: "Conduct Unbecoming an Officer", d: "Conduite indigne d'un officier et d'un gentleman. (Spécifique aux officiers)." },
+            { id: 134, t: "General Article", d: "Désordres et négligences qui nuisent à la discipline ou au prestige de l'armée." }
+            // Note : Pour ajouter les 146 articles, continue le modèle ici.
         ];
 
-        const container = document.getElementById('articlesContainer');
+        const list = document.getElementById('articles-list');
 
-        function loadArticles(data) {
-            container.innerHTML = '';
-            data.forEach(art => {
-                const card = document.createElement('div');
-                card.className = "article-card bg-slate-900/60 border border-slate-800 rounded-lg p-4 cursor-pointer hover:border-amber-600/50 transition-all";
-                card.onclick = () => card.classList.toggle('active');
-                
-                // Couleur par catégorie
-                let badgeColor = art.cat === 'Punitive' ? 'text-red-500 bg-red-500/10' : 'text-blue-500 bg-blue-500/10';
-
-                card.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-4">
-                            <span class="font-military text-amber-500 font-bold w-16 text-sm italic">ART ${art.id}</span>
-                            <h3 class="font-bold text-slate-200 uppercase text-xs md:text-sm tracking-wide">${art.title}</h3>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="text-[9px] px-2 py-1 rounded border border-current font-bold ${badgeColor}">${art.cat}</span>
-                            <i class="fas fa-chevron-down text-slate-600 text-xs transition-transform"></i>
-                        </div>
-                    </div>
-                    <div class="article-content">
-                        <div class="border-t border-slate-800 mt-2 pt-4">
-                            <p class="text-sm text-slate-400 leading-relaxed italic">"${art.text}"</p>
-                            <div class="mt-4 flex space-x-2">
-                                <span class="text-[10px] bg-amber-600/10 text-amber-500 px-2 py-1 rounded">MCM Source: 2024 Edition</span>
-                                <span class="text-[10px] bg-slate-800 text-slate-500 px-2 py-1 rounded">Punishment: Variable</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // Recherche dynamique
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-            const filtered = ucmjDatabase.filter(a => 
-                a.title.toLowerCase().includes(val) || 
-                a.id.toString().includes(val)
-            );
-            loadArticles(filtered);
-        });
-
-        // Charger tout au démarrage
-        loadArticles(ucmjDatabase);
-    </script>
-</body>
-</html>
+        function render(data) {
+            list.innerHTML = '';
+            data.forEach(a => {
+                const div = document
