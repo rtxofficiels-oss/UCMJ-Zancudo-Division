@@ -2,135 +2,101 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>UCMJ | BASE DE DONNÉES ZANCUDO</title>
+    <title>UCMJ | ABSOLUTE ARCHIVE | ZANCUDO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
-        body { background: #000; color: #a1a1aa; font-family: 'Inter', sans-serif; }
-        .article-box { background: #09090b; border: 1px solid #18181b; padding: 20px; margin-bottom: 10px; border-radius: 4px; }
-        .article-box:hover { border-color: #2563eb; }
-        .num { color: #2563eb; font-weight: bold; margin-right: 10px; }
-        .tag { font-size: 10px; background: #1e1b4b; color: #818cf8; padding: 2px 6px; text-transform: uppercase; font-weight: bold; }
-        .desc { margin-top: 10px; color: #d1d5db; font-style: italic; display: block; }
-        input { background: #0a0a0a; border: 1px solid #27272a; color: white; padding: 10px; width: 100%; margin-bottom: 20px; outline: none; }
-        input:focus { border-color: #2563eb; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { background: #000; color: #a1a1aa; font-family: 'Inter', sans-serif; padding: 20px; }
+        .article-box { background: #09090b; border: 1px solid #18181b; padding: 20px; margin-bottom: 12px; border-radius: 4px; }
+        .article-box:hover { border-color: #2563eb; background: #0c1220; }
+        .num { color: #2563eb; font-weight: bold; font-family: monospace; font-size: 1.1em; margin-right: 10px; }
+        .tag { font-size: 10px; background: #1e1b4b; color: #818cf8; padding: 3px 8px; text-transform: uppercase; font-weight: bold; border-radius: 2px; }
+        .desc { margin-top: 12px; color: #d1d5db; font-style: italic; display: block; border-left: 2px solid #2563eb; padding-left: 15px; }
+        input { background: #0a0a0a; border: 1px solid #27272a; color: white; padding: 12px; width: 100%; margin-bottom: 25px; outline: none; border-radius: 4px; position: sticky; top: 10px; z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        h2 { display: inline; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: white; }
+        .section-title { color: #3b82f6; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin: 40px 0 15px 0; border-bottom: 1px solid #2563eb; padding-bottom: 5px; opacity: 0.8; }
     </style>
 </head>
-<body class="p-6">
+<body class="max-w-5xl mx-auto">
 
-    <div class="max-w-4xl mx-auto">
-        <header class="mb-10 flex items-center gap-4">
-            <div style="width:5px; height:40px; background:#2563eb;"></div>
-            <div>
-                <h1 class="text-2xl font-black text-white italic uppercase">Zancudo Division</h1>
-                <p class="text-xs text-blue-500 uppercase tracking-widest">Master Archive - No Script Dependency</p>
-            </div>
-        </header>
-
-        <input type="text" id="searchBar" onkeyup="filterArticles()" placeholder="RECHERCHER UN ARTICLE OU UN MOT CLÉ...">
-
-        <div id="container">
-            <div class="article-box">
-                <span class="num">#1</span><span class="tag">Général</span>
-                <h2 class="text-white font-bold inline uppercase">Définitions</h2>
-                <span class="desc">Termes légaux : Juge-Avocat, Officier, Accusateur, Supérieur.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#2</span><span class="tag">Général</span>
-                <h2 class="text-white font-bold inline uppercase">Juridiction</h2>
-                <span class="desc">Personnes soumises au code : Active, Réservistes, Civils en guerre.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#7</span><span class="tag">Arrestation</span>
-                <h2 class="text-white font-bold inline uppercase">Appréhension</h2>
-                <span class="desc">Pouvoir légal d'arrestation avec cause probable.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#15</span><span class="tag">Sanction</span>
-                <h2 class="text-white font-bold inline uppercase">Article 15 (NJP)</h2>
-                <span class="desc">Punitions administratives immédiates pour fautes mineures.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#77</span><span class="tag">Crime</span>
-                <h2 class="text-white font-bold inline uppercase">Auteurs principaux</h2>
-                <span class="desc">Responsabilité partagée pour complices et donneurs d'ordres.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#85</span><span class="tag">Devoir</span>
-                <h2 class="text-white font-bold inline uppercase">Désertion</h2>
-                <span class="desc">Abandon de poste définitif ou fuite devant l'ennemi.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#86</span><span class="tag">Devoir</span>
-                <h2 class="text-white font-bold inline uppercase">AWOL</h2>
-                <span class="desc">Absence sans autorisation (Absent Without Leave).</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#90</span><span class="tag">Ordres</span>
-                <h2 class="text-white font-bold inline uppercase">Agression de Supérieur</h2>
-                <span class="desc">Violence physique ou désobéissance volontaire.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#92</span><span class="tag">Ordres</span>
-                <h2 class="text-white font-bold inline uppercase">Violation d'Ordre</h2>
-                <span class="desc">Non-respect d'un règlement ou ordre général.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#104</span><span class="tag">Guerre</span>
-                <h2 class="text-white font-bold inline uppercase">Aide à l'ennemi</h2>
-                <span class="desc">Soutien matériel, financier ou informationnel à l'ennemi.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#106</span><span class="tag">Guerre</span>
-                <h2 class="text-white font-bold inline uppercase">Espionnage</h2>
-                <span class="desc">Collecte de secrets militaires (Passible de la peine de mort).</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#107</span><span class="tag">Fraude</span>
-                <h2 class="text-white font-bold inline uppercase">Fausse déclaration</h2>
-                <span class="desc">Mensonge officiel oral ou écrit.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#112a</span><span class="tag">Drogue</span>
-                <h2 class="text-white font-bold inline uppercase">Stupéfiants</h2>
-                <span class="desc">Possession, usage ou trafic de substances illicites.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#118</span><span class="tag">Sang</span>
-                <h2 class="text-white font-bold inline uppercase">Meurtre</h2>
-                <span class="desc">Homicide volontaire ou prémédité.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#121</span><span class="tag">Vol</span>
-                <h2 class="text-white font-bold inline uppercase">Larceny</h2>
-                <span class="desc">Vol simple de biens privés ou militaires.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#123</span><span class="tag">Fraude</span>
-                <h2 class="text-white font-bold inline uppercase">Falsification</h2>
-                <span class="desc">Faux documents, signatures ou ordres falsifiés.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#128</span><span class="tag">Violence</span>
-                <h2 class="text-white font-bold inline uppercase">Assault</h2>
-                <span class="desc">Coups et blessures ou menace de violence physique.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#131</span><span class="tag">Justice</span>
-                <h2 class="text-white font-bold inline uppercase">Parjure</h2>
-                <span class="desc">Faire un faux témoignage sous serment.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#131b</span><span class="tag">Justice</span>
-                <h2 class="text-white font-bold inline uppercase">Obstruction</h2>
-                <span class="desc">Entraver une enquête ou cacher des preuves.</span>
-            </div>
-            <div class="article-box">
-                <span class="num">#134</span><span class="tag">Général</span>
-                <h2 class="text-white font-bold inline uppercase">Article Général</h2>
-                <span class="desc">Désordres divers : Adultère, dettes, inconduite.</span>
-            </div>
+    <header class="mb-10 flex items-center gap-5">
+        <div style="width:6px; height:80px; background:#2563eb; box-shadow: 0 0 25px #2563eb;"></div>
+        <div>
+            <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter">Zancudo Division</h1>
+            <p class="text-xs text-blue-500 uppercase tracking-widest font-bold">UCMJ Omniscience • Extended Archive v8.0</p>
         </div>
+    </header>
+
+    <input type="text" id="searchBar" onkeyup="filterArticles()" placeholder="RECHERCHE DANS LES 60+ ARTICLES (EX: VOL, AGRESSION, 131, TRAHISON)...">
+
+    <div id="container">
+        
+        <div class="section-title">⚖️ Procédures et Juridiction</div>
+        <div class="article-box"><span class="num">#1</span><span class="tag">Général</span><h2>Définitions</h2><span class="desc">Définit les termes légaux : Juge-avocat, officier, personnel enrôlé.</span></div>
+        <div class="article-box"><span class="num">#2</span><span class="tag">Général</span><h2>Juridiction</h2><span class="desc">Liste toutes les personnes soumises au code (Actifs, Réservistes, Garde Nationale).</span></div>
+        <div class="article-box"><span class="num">#3</span><span class="tag">Droit</span><h2>Juridiction Résiduelle</h2><span class="desc">Poursuite des crimes après la fin du service militaire.</span></div>
+        <div class="article-box"><span class="num">#7</span><span class="tag">Arrestation</span><h2>Appréhension</h2><span class="desc">Autorité légale d'arrestation basée sur une cause probable.</span></div>
+        <div class="article-box"><span class="num">#8</span><span class="tag">Arrestation</span><h2>Arrestation de Déserteurs</h2><span class="desc">Collaboration avec les autorités civiles pour capturer les fugitifs.</span></div>
+        <div class="article-box"><span class="num">#9</span><span class="tag">Force</span><h2>Confinement</h2><span class="desc">Différence entre restriction de mouvement et cellule de détention.</span></div>
+        <div class="article-box"><span class="num">#13</span><span class="tag">Droits</span><h2>Traitement pré-procès</h2><span class="desc">Interdiction de punir un suspect avant son verdict.</span></div>
+        <div class="article-box"><span class="num">#15</span><span class="tag">Sanction</span><h2>Article 15 (NJP)</h2><span class="desc">Sanctions disciplinaires rapides sans passage au tribunal.</span></div>
+
+        <div class="section-title">⚔️ Discipline et Ordres</div>
+        <div class="article-box"><span class="num">#85</span><span class="tag">Devoir</span><h2>Désertion</h2><span class="desc">Abandon définitif ou fuite devant un service périlleux.</span></div>
+        <div class="article-box"><span class="num">#86</span><span class="tag">Devoir</span><h2>AWOL</h2><span class="desc">Absence sans autorisation officielle.</span></div>
+        <div class="article-box"><span class="num">#87</span><span class="tag">Devoir</span><h2>Manquement au mouvement</h2><span class="desc">Rater délibérément un départ d'avion ou de navire.</span></div>
+        <div class="article-box"><span class="num">#89</span><span class="tag">Insubordination</span><h2>Irrespect Officier</h2><span class="desc">Comportement insultant ou dégradant envers la hiérarchie.</span></div>
+        <div class="article-box"><span class="num">#90</span><span class="tag">Insubordination</span><h2>Agression / Désobéissance</h2><span class="desc">Violence sur officier ou refus direct d'un ordre légal.</span></div>
+        <div class="article-box"><span class="num">#91</span><span class="tag">Insubordination</span><h2>Insubordination NCO</h2><span class="desc">Mépris ou agression envers un sous-officier (Sergent, etc.).</span></div>
+        <div class="article-box"><span class="num">#92</span><span class="tag">Ordres</span><h2>Violation d'Ordre Général</h2><span class="desc">Infraction aux règlements permanents de la base.</span></div>
+        <div class="article-box"><span class="num">#93</span><span class="tag">Abus</span><h2>Cruauté / Mauvais traitements</h2><span class="desc">Abus d'autorité ou maltraitance des subordonnés.</span></div>
+        <div class="article-box"><span class="num">#94</span><span class="tag">Révolte</span><h2>Mutinerie / Sédition</h2><span class="desc">Complot ou acte collectif visant à renverser le commandement.</span></div>
+        <div class="article-box"><span class="num">#95</span><span class="tag">Évasion</span><h2>Résistance à l'arrestation</h2><span class="desc">Opposition physique lors d'une interpellation légale.</span></div>
+
+        <div class="section-title">🛡️ Sécurité Nationale et Guerre</div>
+        <div class="article-box"><span class="num">#99</span><span class="tag">Combat</span><h2>Lâcheté au combat</h2><span class="desc">Fuite ou abandon de poste devant l'adversaire.</span></div>
+        <div class="article-box"><span class="num">#101</span><span class="tag">Sécurité</span><h2>Divulgation de Codes</h2><span class="desc">Trahison de mots de passe ou signaux secrets.</span></div>
+        <div class="article-box"><span class="num">#103</span><span class="tag">Guerre</span><h2>Butins de guerre</h2><span class="desc">Pillage ou capture illégale de biens ennemis.</span></div>
+        <div class="article-box"><span class="num">#104</span><span class="tag">Trahison</span><h2>Aide à l'ennemi</h2><span class="desc">Donner des munitions, de l'argent ou des infos à l'ennemi.</span></div>
+        <div class="article-box"><span class="num">#105</span><span class="tag">Captivité</span><h2>Inconduite Prisonnier</h2><span class="desc">Trahir ses camarades détenus pour obtenir des faveurs.</span></div>
+        <div class="article-box"><span class="num">#106</span><span class="tag">Espionnage</span><h2>Espionnage</h2><span class="desc">Trahison de secrets d'État (Passible de la peine de mort).</span></div>
+        <div class="article-box"><span class="num">#108</span><span class="tag">Matériel</span><h2>Sabotage / Perte</h2><span class="desc">Destruction de matériel militaire (Armes, véhicules).</span></div>
+        <div class="article-box"><span class="num">#109</span><span class="tag">Civil</span><h2>Dégâts biens privés</h2><span class="desc">Vandalisme ou destruction de biens civils.</span></div>
+        <div class="article-box"><span class="num">#110</span><span class="tag">Marine</span><h2>Risque maritime</h2><span class="desc">Action mettant en danger un navire de la flotte.</span></div>
+
+        <div class="section-title">🚨 Conduite et Santé</div>
+        <div class="article-box"><span class="num">#111</span><span class="tag">Véhicule</span><h2>Ivresse au volant</h2><span class="desc">Conduite de tout véhicule sous influence (Alcool/Drogue).</span></div>
+        <div class="article-box"><span class="num">#112</span><span class="tag">Service</span><h2>Ivresse au service</h2><span class="desc">Facultés affaiblies durant une mission ou une garde.</span></div>
+        <div class="article-box"><span class="num">#112a</span><span class="tag">Drogue</span><h2>Stupéfiants</h2><span class="desc">Possession, usage ou trafic de substances interdites.</span></div>
+        <div class="article-box"><span class="num">#113</span><span class="tag">Garde</span><h2>Faute de Sentinelle</h2><span class="desc">Sentinelle endormie ou ayant quitté son poste.</span></div>
+        <div class="article-box"><span class="num">#114</span><span class="tag">Désordre</span><h2>Duel</h2><span class="desc">Combats singuliers programmés entre membres.</span></div>
+        <div class="article-box"><span class="num">#115</span><span class="tag">Fraude</span><h2>Malingering</h2><span class="desc">Simuler une blessure pour éviter le service.</span></div>
+        <div class="article-box"><span class="num">#116</span><span class="tag">Désordre</span><h2>Émeute</h2><span class="desc">Participation à un trouble violent de l'ordre public.</span></div>
+        <div class="article-box"><span class="num">#117</span><span class="tag">Désordre</span><h2>Provocation</h2><span class="desc">Geste ou parole visant à déclencher une bagarre.</span></div>
+
+        <div class="section-title">🔪 Crimes Sang et Sexe</div>
+        <div class="article-box"><span class="num">#118</span><span class="tag">Sang</span><h2>Meurtre</h2><span class="desc">Homicide volontaire et prémédité.</span></div>
+        <div class="article-box"><span class="num">#119</span><span class="tag">Sang</span><h2>Homicide involontaire</h2><span class="desc">Mort causée par imprudence ou négligence.</span></div>
+        <div class="article-box"><span class="num">#120</span><span class="tag">Sexe</span><h2>Viol / Agression</h2><span class="desc">Crime sexuel violent ou non consenti.</span></div>
+        <div class="article-box"><span class="num">#120a</span><span class="tag">Sexe</span><h2>Stalking</h2><span class="desc">Harcèlement et traque de personne.</span></div>
+        <div class="article-box"><span class="num">#124</span><span class="tag">Violence</span><h2>Mutilation</h2><span class="desc">Infliger des blessures permanentes (Perte de membres).</span></div>
+        <div class="article-box"><span class="num">#128</span><span class="tag">Violence</span><h2>Agression (Assault)</h2><span class="desc">Coups, blessures ou tentative de violence physique.</span></div>
+
+        <div class="section-title">💰 Vols et Fraudes</div>
+        <div class="article-box"><span class="num">#121</span><span class="tag">Vol</span><h2>Larceny</h2><span class="desc">Vol simple de matériel ou de biens.</span></div>
+        <div class="article-box"><span class="num">#122</span><span class="tag">Vol</span><h2>Braquage</h2><span class="desc">Vol par la force ou l'intimidation.</span></div>
+        <div class="article-box"><span class="num">#123</span><span class="tag">Fraude</span><h2>Falsification</h2><span class="desc">Faux documents, ordres falsifiés ou signatures imitées.</span></div>
+        <div class="article-box"><span class="num">#123a</span><span class="tag">Fraude</span><h2>Chèques sans provision</h2><span class="desc">Fraude financière préméditée.</span></div>
+        <div class="article-box"><span class="num">#132</span><span class="tag">Fraude</span><h2>Fraude gouvernementale</h2><span class="desc">Détournement de fonds militaires ou fausses réclamations.</span></div>
+
+        <div class="section-title">📁 Justice et Intégrité</div>
+        <div class="article-box"><span class="num">#131</span><span class="tag">Justice</span><h2>Parjure</h2><span class="desc">Mensonge sous serment devant un officier ou un juge.</span></div>
+        <div class="article-box"><span class="num">#131a</span><span class="tag">Justice</span><h2>Subornation</h2><span class="desc">Forcer ou payer un témoin pour mentir.</span></div>
+        <div class="article-box"><span class="num">#131b</span><span class="tag">Justice</span><h2>Obstruction</h2><span class="desc">Cacher des preuves ou bloquer une enquête en cours.</span></div>
+        <div class="article-box"><span class="num">#133</span><span class="tag">Honneur</span><h2>Conduite d'Officier</h2><span class="desc">Acte indigne du rang d'officier et de gentleman.</span></div>
+        <div class="article-box"><span class="num">#134</span><span class="tag">Général</span><h2>Article Général</h2><span class="desc">Adultère, dettes impayées, comportement nuisible au bon ordre.</span></div>
+        <div class="article-box"><span class="num">#138</span><span class="tag">Recours</span><h2>Plainte contre Supérieur</h2><span class="desc">Droit de signaler un abus de la part d'un commandant.</span></div>
+
     </div>
 
     <script>
@@ -139,7 +105,7 @@
             let boxes = document.getElementsByClassName('article-box');
             for (let i = 0; i < boxes.length; i++) {
                 let text = boxes[i].innerText.toLowerCase();
-                boxes[i].style.display = text.includes(input) ? "" : "none";
+                boxes[i].style.display = text.includes(input) ? "block" : "none";
             }
         }
     </script>
