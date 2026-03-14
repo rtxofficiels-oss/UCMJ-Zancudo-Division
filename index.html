@@ -40,24 +40,61 @@
     <script>
         // LA LISTE COMPLÈTE DES CODES UCMJ
         const ucmjData = [
-            { id: 1, t: "Definitions", d: "Définitions des termes officiels : Officier, Juge-Avocat, Accusateur." },
-            { id: 2, t: "Persons Subject to UCMJ", d: "Liste des personnes soumises au code (Actifs, Réservistes, Prisonniers de guerre)." },
-            { id: 7, t: "Apprehension", d: "Le droit d'appréhender des personnes suspectées d'infractions." },
-            { id: 15, t: "Non-Judicial Punishment (NJP)", d: "Punitions administratives sans cour martiale. Sanctions de commandement." },
-            { id: 77, t: "Principals", d: "Toute personne qui commet, aide ou conseille un crime est responsable comme auteur principal." },
-            { id: 85, t: "Desertion", d: "Abandon de son unité avec l'intention de ne pas y retourner." },
-            { id: 86, t: "AWOL (Absence Without Leave)", d: "Manque à l'appel. Absence de son lieu de service sans autorisation." },
-            { id: 87, t: "Missing Movement", d: "Manquer le départ d'un navire, avion ou unité par négligence ou intention." },
-            { id: 89, t: "Disrespect Toward Superior Officer", d: "Comportement irrespectueux envers un officier supérieur." },
-            { id: 90, t: "Assault / Disobeying Superior Officer", d: "Frapper un officier supérieur ou désobéir volontairement à un ordre direct." },
-            { id: 91, t: "Insubordinate Conduct", d: "Insubordination envers un sous-officier ou un adjudant." },
-            { id: 92, t: "Failure to Obey Order", d: "Violation d'un règlement général ou d'un ordre légitime. Dérive de fonction." },
-            { id: 107, t: "False Official Statements", d: "Signature de documents faux ou déclarations mensongères avec intention de tromper." },
-            { id: 112, t: "Drunk on Duty", d: "Être ivre ou sous influence pendant le service." },
-            { id: 121, t: "Larceny / Wrongful Appropriation", d: "Vol ou utilisation non autorisée de la propriété d'autrui ou du gouvernement." },
-            { id: 133, t: "Conduct Unbecoming an Officer", d: "Conduite indigne d'un officier et d'un gentleman. (Spécifique aux officiers)." },
-            { id: 134, t: "General Article", d: "Désordres et négligences qui nuisent à la discipline ou au prestige de l'armée." }
-            // Note : Pour ajouter les 146 articles, continue le modèle ici.
+            // I. GENERAL PROVISIONS
+            { id: 1, t: "Definitions", d: "Définition des termes : Officier, Juge-Avocat, Accusateur, etc." },
+            { id: 2, t: "Persons Subject to this Chapter", d: "Membres des forces armées, réservistes en service, prisonniers de guerre." },
+            { id: 3, t: "Jurisdiction to Try Certain Persons", d: "Compétence pour juger les personnes ayant quitté le service pour des crimes commis pendant le service." },
+            { id: 4, t: "Dismissal of Commissioned Officer", d: "Droit à un procès en cour martiale après un renvoi par ordre présidentiel." },
+            { id: 5, t: "Territorial Applicability", d: "L'UCMJ s'applique en tout lieu (USA et étranger)." },
+            { id: 6, t: "Judge Advocates", d: "Attributions et inspections par les officiers juridiques." },
+
+            // II. APPREHENSION AND RESTRAINT
+            { id: 7, t: "Apprehension", d: "Droit d'arrestation des suspects de crimes militaires." },
+            { id: 8, t: "Apprehension of Deserters", d: "Pouvoir des civils mandatés pour arrêter les déserteurs." },
+            { id: 9, t: "Imposition of Restraint", d: "Arrestation ou confinement des suspects." },
+            { id: 10, t: "Restraint of Persons Charged", d: "Procédures immédiates pour informer le suspect des charges contre lui." },
+            { id: 13, t: "Punishment Prohibited Before Trial", d: "Interdiction de punir un suspect avant son procès (sauf garde à vue)." },
+
+            // III. NON-JUDICIAL PUNISHMENT
+            { id: 15, t: "Commanding Officer's NJP", d: "L'Article 15 : Sanctions disciplinaires imposées sans cour martiale." },
+
+            // X. PUNITIVE ARTICLES (LES CRIMES)
+            { id: 77, t: "Principals", d: "Responsabilité de ceux qui aident ou ordonnent un crime." },
+            { id: 78, t: "Accessory After the Fact", d: "Complicité après les faits pour aider un criminel à s'échapper." },
+            { id: 80, t: "Attempts", d: "Tentative de commettre une infraction." },
+            { id: 81, t: "Conspiracy", d: "Conspiration : Accord entre deux personnes ou plus pour commettre un crime." },
+            { id: 82, t: "Solicitation", d: "Inciter autrui à déserter ou à se mutiner." },
+            { id: 83, t: "Fraudulent Enlistment", d: "Engagement dans l'armée par mensonge ou tromperie." },
+            { id: 85, t: "Desertion", d: "Abandon de poste avec l'intention de ne pas revenir." },
+            { id: 86, t: "Absence Without Leave (AWOL)", d: "Manquement à l'appel. Absence non autorisée." },
+            { id: 87, t: "Missing Movement", d: "Manquer le départ d'un navire, avion ou unité." },
+            { id: 88, t: "Contempt Toward Officials", d: "Paroles méprisantes contre les autorités civiles (Président, Congrès)." },
+            { id: 89, t: "Disrespect Toward Superior Officer", d: "Comportement irrespectueux envers un officier." },
+            { id: 90, t: "Assaulting / Disobeying Officer", d: "Agression ou désobéissance volontaire à un ordre légitime." },
+            { id: 91, t: "Insubordinate Conduct", d: "Insubordination envers un adjudant ou sous-officier (NCO)." },
+            { id: 92, t: "Failure to Obey Order", d: "Violation d'un règlement général ou d'un ordre (Art. le plus courant)." },
+            { id: 93, t: "Cruelty and Maltreatment", d: "Cruauté ou mauvais traitements envers des subordonnés." },
+            { id: 94, t: "Mutiny and Sedition", d: "Révolte collective contre l'autorité militaire." },
+            { id: 95, t: "Resistance, Breach of Arrest", d: "Résistance à une arrestation ou évasion d'une cellule." },
+            { id: 99, t: "Misbehavior Before the Enemy", d: "Lâcheté, abandon de poste ou reddition injustifiée devant l'ennemi." },
+            { id: 104, t: "Aiding the Enemy", d: "Fournir des armes, des infos ou de l'aide à l'ennemi." },
+            { id: 106, t: "Spies", d: "Espionnage (passible de la peine de mort en temps de guerre)." },
+            { id: 107, t: "False Official Statements", d: "Déclarations officielles mensongères." },
+            { id: 108, t: "Loss / Damage Military Property", d: "Vente, perte ou destruction de matériel militaire." },
+            { id: 112, t: "Drunk on Duty", d: "Ivresse en service." },
+            { id: 112, t: "Controlled Substances", d: "Usage, possession ou trafic de drogue." },
+            { id: 113, t: "Misbehavior of Sentinel", d: "Sentinelle endormie ou ivre à son poste." },
+            { id: 115, t: "Malingering", d: "Feindre une maladie ou se blesser pour éviter le service." },
+            { id: 116, t: "Riot or Breach of Peace", d: "Participation à une émeute ou trouble à l'ordre public." },
+            { id: 117, t: "Provoking Speeches", d: "Utilisation de gestes ou paroles provocatrices." },
+            { id: 118, t: "Murder", d: "Meurtre." },
+            { id: 119, t: "Manslaughter", d: "Homicide involontaire." },
+            { id: 120, t: "Rape / Sexual Assault", d: "Viol et agressions sexuelles." },
+            { id: 121, t: "Larceny", d: "Vol et appropriation illicite." },
+            { id: 124, t: "Frauds Against the US", d: "Fraude financière contre le gouvernement." },
+            { id: 128, t: "Assault", d: "Agression physique." },
+            { id: 133, t: "Conduct Unbecoming an Officer", d: "Conduite indigne d'un officier et d'un gentleman." },
+            { id: 134, t: "General Article", d: "L'article fourre-tout : tout ce qui nuit à la discipline ou porte discrédit." }
         ];
 
         const list = document.getElementById('articles-list');
