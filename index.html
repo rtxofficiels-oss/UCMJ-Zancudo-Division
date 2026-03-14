@@ -3,141 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zancudo Division | UCMJ Official Database</title>
+    <title>ZANCUDO DIVISION | UCMJ ARCHIVES</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0b0f1a; color: #e2e8f0; }
-        .sidebar-active { background: rgba(180, 83, 9, 0.2); border-right: 4px solid #b45309; color: white; }
-        .article-card { border: 1px solid #1e293b; transition: all 0.3s ease; }
-        .article-card:hover { border-color: #b45309; background: #161e2d; shadow: 0 10px 15px -3px rgba(0,0,0,0.5); }
-        .text-military { color: #b45309; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
+        
+        :root { --mil-gold: #c5a059; --mil-olive: #3d4430; }
+        body { background-color: #05070a; color: #d1d5db; font-family: 'Roboto Mono', monospace; }
+        .font-title { font-family: 'Orbitron', sans-serif; }
+        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.2); }
+        .sidebar-link:hover { background: rgba(197, 160, 89, 0.1); color: var(--mil-gold); border-right: 3px solid var(--mil-gold); }
+        .active-cat { background: rgba(197, 160, 89, 0.2); color: var(--mil-gold); border-right: 3px solid var(--mil-gold); }
+        
+        /* Animation de scan line */
+        .scanline { width: 100%; height: 2px; background: rgba(197, 160, 89, 0.1); position: absolute; animation: scan 4s linear infinite; }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden">
 
-    <aside class="w-80 bg-slate-950 border-r border-slate-800 flex flex-col hidden lg:flex">
-        <div class="p-8 border-b border-slate-800">
-            <h1 class="text-2xl font-black tracking-tighter text-amber-600 italic">ZANCUDO DIVISION</h1>
-            <p class="text-[10px] text-slate-500 font-mono mt-2 uppercase tracking-[0.3em]">UCMJ Unified Command</p>
+    <aside class="w-72 glass-panel border-r border-amber-900/30 flex flex-col z-20">
+        <div class="p-6 border-b border-amber-900/30 relative overflow-hidden">
+            <div class="scanline"></div>
+            <h1 class="font-title text-xl font-bold text-amber-500 tracking-tighter">ZANCUDO</h1>
+            <p class="text-[10px] text-amber-700 font-bold tracking-[4px]">DIVISION UCMJ</p>
         </div>
         
-        <nav class="flex-1 overflow-y-auto p-4 space-y-1" id="categoryNav">
-            <p class="text-[10px] font-bold text-slate-600 uppercase px-3 py-2 tracking-widest text-center border-b border-slate-900 mb-2">Chapters</p>
+        <div class="p-4">
+            <input type="text" id="searchArt" placeholder="SEARCH CODES..." 
+                   class="w-full bg-black/50 border border-amber-900/50 rounded p-2 text-xs focus:outline-none focus:border-amber-500 text-amber-500">
+        </div>
+
+        <nav class="flex-1 overflow-y-auto" id="navMenu">
+            <button onclick="displayAll()" class="sidebar-link w-full text-left p-4 text-xs font-bold uppercase transition">
+                <i class="fas fa-database mr-2"></i> All Archives
+            </button>
             </nav>
 
-        <div class="p-4 bg-black/40 border-t border-slate-800">
-            <div class="flex items-center space-x-3">
-                <div class="w-2 h-2 bg-green-500 animate-pulse rounded-full"></div>
-                <span class="text-[10px] font-mono text-slate-400 uppercase leading-none">System Online // Database encrypted</span>
-            </div>
+        <div class="p-4 text-[9px] text-amber-900 border-t border-amber-900/20 font-bold">
+            RESTRICTED ACCESS - LEVEL 4 REQUIRED
         </div>
     </aside>
 
-    <main class="flex-1 flex flex-col h-full bg-[#0f172a]">
-        
-        <header class="h-20 bg-slate-900/50 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-10">
-            <div class="relative w-full max-w-xl">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                <input type="text" id="ucmjSearch" placeholder="Search Article # or Keyword (ex: Desertion, Art 15...)" 
-                       class="bg-slate-950 border border-slate-700 rounded-lg py-3 pl-12 pr-4 w-full text-sm focus:ring-2 focus:ring-amber-600 outline-none transition-all">
+    <main class="flex-1 flex flex-col relative">
+        <div class="absolute inset-0 opacity-5 pointer-events-none" 
+             style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
+
+        <header class="h-16 flex items-center justify-between px-8 border-b border-amber-900/20 bg-black/20">
+            <div class="flex items-center space-x-4">
+                <span class="text-xs text-amber-600/50"><i class="fas fa-terminal mr-2"></i>SYSTEM_ID: AR700-1</span>
+                <span id="breadcrumb" class="text-xs font-bold text-amber-500 uppercase tracking-widest">/ MAIN_DATABASE</span>
             </div>
-            <div class="ml-6 flex items-center space-x-4">
-                <div class="hidden md:block text-right">
-                    <p class="text-[10px] font-bold text-slate-500 uppercase">Current Source</p>
-                    <p class="text-xs font-mono text-amber-500">Manual for Courts-Martial (2024)</p>
-                </div>
-                <div class="h-10 w-10 bg-amber-600 rounded flex items-center justify-center shadow-lg shadow-amber-900/20">
-                    <i class="fas fa-folder-open text-white"></i>
-                </div>
-            </div>
+            <div id="clock" class="text-xs font-bold text-amber-600"></div>
         </header>
 
-        <div id="mainDisplay" class="flex-1 overflow-y-auto p-10">
-            <div id="categoryHeader" class="mb-10">
-                <h2 class="text-4xl font-extrabold text-white mb-2" id="currentCatTitle">All Articles</h2>
-                <div class="h-1 w-20 bg-amber-600"></div>
+        <div id="contentArea" class="flex-1 overflow-y-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-6 content-start">
             </div>
-
-            <div id="articlesGrid" class="grid grid-cols-1 xl:grid-cols-2 gap-6">
-                </div>
-        </div>
     </main>
 
+    <script src="ucmj_data.js"></script>
     <script>
-        // BASE DE DONNÉES SIMPLIFIÉE (À compléter selon vos besoins)
-        const ucmjData = [
-            { id: 1, cat: "General Provisions", title: "Definitions", text: "The term 'Judge Advocate' means an officer of the Judge Advocate General's Corps..." },
-            { id: 2, cat: "General Provisions", title: "Persons subject to this chapter", text: "The following persons are subject to this chapter: Members of a regular component of the armed forces..." },
-            { id: 7, cat: "Apprehension & Restraint", title: "Apprehension", text: "Apprehension is the taking of a person into custody. Any person authorized under regulations..." },
-            { id: 15, cat: "Non-Judicial Punishment", title: "Commanding Officer's NJP", text: "Any commanding officer may, in addition to or in lieu of admonition or reprimand, impose disciplinary punishments..." },
-            { id: 77, cat: "Punitive Articles", title: "Principals", text: "Any person punishable under this chapter who— (1) commits an offense punishable by this chapter..." },
-            { id: 85, cat: "Punitive Articles", title: "Desertion", text: "Any member of the armed forces who— (1) without authority goes or remains absent from his unit..." },
-            { id: 86, cat: "Punitive Articles", title: "AWOL", text: "Absence without leave. Any member who fails to go to his appointed place of duty..." },
-            { id: 92, cat: "Punitive Articles", title: "Failure to Obey", text: "Violates or fails to obey any lawful general order or regulation..." },
-            { id: 133, cat: "Punitive Articles", title: "Conduct unbecoming an officer", text: "Any commissioned officer, cadet, or midshipman who is convicted of conduct unbecoming an officer and a gentleman..." },
-            { id: 134, cat: "Punitive Articles", title: "General Article", text: "Though not specifically mentioned in this chapter, all disorders and neglects to the prejudice of good order and discipline..." }
-        ];
+        const contentArea = document.getElementById('contentArea');
+        const navMenu = document.getElementById('navMenu');
 
-        const categories = [...new Set(ucmjData.map(item => item.cat))];
-
+        // Initialisation
         function init() {
-            renderSidebar();
-            renderArticles(ucmjData);
+            displayArticles(ucmjDatabase);
+            generateCategories();
+            updateClock();
+            setInterval(updateClock, 1000);
         }
 
-        function renderSidebar() {
-            const nav = document.getElementById('categoryNav');
-            nav.innerHTML += `<button onclick="renderArticles(ucmjData, 'All Articles')" class="w-full flex items-center p-3 rounded text-sm text-slate-400 hover:text-white transition sidebar-active">
-                <i class="fas fa-layer-group w-8"></i> All Articles</button>`;
-            
-            categories.forEach(cat => {
-                nav.innerHTML += `
-                    <button onclick="filterByCat('${cat}')" class="w-full flex items-center p-3 rounded text-sm text-slate-400 hover:text-white transition sidebar-item">
-                        <i class="fas fa-chevron-right w-8 text-[10px]"></i> ${cat}
-                    </button>
-                `;
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' Z';
+        }
+
+        function generateCategories() {
+            const cats = [...new Set(ucmjDatabase.map(a => a.cat))];
+            cats.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = "sidebar-link w-full text-left p-4 text-[11px] uppercase transition border-b border-white/5 text-slate-400";
+                btn.innerHTML = `<i class="fas fa-chevron-right mr-2 text-[8px]"></i> ${cat}`;
+                btn.onclick = () => filterCat(cat);
+                navMenu.appendChild(btn);
             });
         }
 
-        function renderArticles(data, title = "All Articles") {
-            const grid = document.getElementById('articlesGrid');
-            const catTitle = document.getElementById('currentCatTitle');
-            catTitle.innerText = title;
-            grid.innerHTML = '';
-
+        function displayArticles(data) {
+            contentArea.innerHTML = '';
             data.forEach(art => {
-                grid.innerHTML += `
-                    <div class="article-card bg-slate-900/40 p-8 rounded-xl relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition">
-                            <i class="fas fa-shield-halved text-4xl text-amber-600"></i>
+                contentArea.innerHTML += `
+                    <div class="glass-panel p-6 rounded-sm border-l-4 border-amber-600 hover:bg-amber-900/5 transition group">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="bg-amber-600 text-black px-2 py-0.5 text-[10px] font-bold">ART. ${art.id}</span>
+                            <span class="text-[9px] text-amber-700 font-bold uppercase tracking-tighter">Part ${art.part} // ${art.cat}</span>
                         </div>
-                        <div class="flex items-center space-x-4 mb-4">
-                            <span class="bg-amber-600/10 text-amber-500 text-[11px] font-black px-3 py-1 rounded border border-amber-600/20 uppercase">Article ${art.id}</span>
-                            <span class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">${art.cat}</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-amber-500 transition">${art.title}</h3>
-                        <p class="text-sm text-slate-400 leading-relaxed font-light italic border-l-2 border-slate-800 pl-4">
-                            "${art.text}"
+                        <h3 class="font-title text-sm font-bold text-white mb-3 tracking-wide group-hover:text-amber-500">${art.title}</h3>
+                        <p class="text-xs leading-relaxed text-slate-400 font-light border-t border-white/5 pt-3">
+                            ${art.text}
                         </p>
                     </div>
                 `;
             });
         }
 
-        function filterByCat(cat) { renderArticles(ucmjData.filter(a => a.cat === cat), cat); }
+        function filterCat(cat) {
+            const filtered = ucmjDatabase.filter(a => a.cat === cat);
+            document.getElementById('breadcrumb').innerText = `/ ${cat.toUpperCase()}`;
+            displayArticles(filtered);
+        }
 
-        document.getElementById('ucmjSearch').addEventListener('input', (e) => {
+        function displayAll() {
+            document.getElementById('breadcrumb').innerText = `/ MAIN_DATABASE`;
+            displayArticles(ucmjDatabase);
+        }
+
+        // Recherche en temps réel
+        document.getElementById('searchArt').addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
-            const filtered = ucmjData.filter(a => 
+            const filtered = ucmjDatabase.filter(a => 
                 a.title.toLowerCase().includes(val) || 
-                a.text.toLowerCase().includes(val) || 
+                a.text.toLowerCase().includes(val) ||
                 a.id.toString().includes(val)
             );
-            renderArticles(filtered, "Search Results");
+            displayArticles(filtered);
         });
 
         init();
