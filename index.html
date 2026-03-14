@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>UCMJ | ENCYCLOPÉDIE ZANCUDO</title>
+    <title>UCMJ | ENCYCLOPÉDIE ZANCUDO | COMPLETE EDITION</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap');
@@ -15,7 +15,7 @@
         .legal-note { margin-top: 10px; color: #71717a; font-size: 0.8em; font-style: italic; border-top: 1px solid #18181b; padding-top: 10px; }
         input { background: #0a0a0a; border: 1px solid #27272a; color: white; padding: 15px; width: 100%; margin-bottom: 30px; outline: none; border-radius: 4px; position: sticky; top: 10px; z-index: 100; box-shadow: 0 10px 40px rgba(0,0,0,0.9); }
         h2 { display: inline; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; color: #f4f4f5; }
-        .section-header { color: #3b82f6; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 4px; margin: 50px 0 20px 0; display: flex; items-center: center; gap: 10px; }
+        .section-header { color: #3b82f6; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 4px; margin: 50px 0 20px 0; display: flex; align-items: center; gap: 10px; }
         .section-header::after { content: ""; height: 1px; background: #2563eb; flex-grow: 1; opacity: 0.3; }
     </style>
 </head>
@@ -26,12 +26,12 @@
             <div style="width:8px; height:90px; background:#2563eb; box-shadow: 0 0 30px #2563eb;"></div>
             <div>
                 <h1 class="text-5xl font-black text-white italic uppercase tracking-tighter">Zancudo Division</h1>
-                <p class="text-sm text-blue-500 uppercase tracking-[0.3em] font-bold">UCMJ Comprehensive Legal Archive • Ver. 9.0</p>
+                <p class="text-sm text-blue-500 uppercase tracking-[0.3em] font-bold">UCMJ Comprehensive Legal Archive • Ver. 11.0</p>
             </div>
         </div>
     </header>
 
-    <input type="text" id="searchBar" onkeyup="filterArticles()" placeholder="RECHERCHE AVANCÉE (CRIME, MOTS-CLÉS, #NUMÉRO)...">
+    <input type="text" id="searchBar" onkeyup="filterArticles()" placeholder="RECHERCHE DANS L'ARCHIVE COMPLÈTE (#, MOT-CLÉ, TITRE)...">
 
     <div id="container">
         
@@ -45,10 +45,30 @@
         </div>
 
         <div class="article-box">
+            <span class="num">#7</span><span class="tag">Arrestation</span>
+            <h2>Appréhension et Contrainte</h2>
+            <span class="details-text">L'appréhension est la prise sous garde d'une personne. Elle nécessite une "cause probable", c'est-à-dire des motifs raisonnables de croire qu'une infraction a été commise.</span>
+        </div>
+
+        <div class="article-box">
             <span class="num">#15</span><span class="tag">NJP</span>
             <h2>Punition Non-Judiciaire</h2>
-            <span class="details-text">Permet à un commandant d'imposer des sanctions sans cour martiale pour des infractions mineures. Les punitions incluent la restriction de liberté (max 60 jours), la corvée supplémentaire (max 45 jours), la retenue de salaire ou la réduction de grade.</span>
-            <span class="legal-note">Note : Le militaire a le droit de refuser l'Art. 15 pour demander un procès complet.</span>
+            <span class="details-text">Permet à un commandant d'imposer des sanctions sans cour martiale pour des infractions mineures (restriction, corvée, réduction de grade).</span>
+        </div>
+
+        <div class="section-header">🔍 INVESTIGATION ET PROCÉDURE</div>
+
+        <div class="article-box">
+            <span class="num">#46</span><span class="tag">Justice</span>
+            <h2>Droit d'Obtenir des Preuves</h2>
+            <span class="details-text">Le procureur et l'accusé ont un droit égal d'obtenir des témoins et des preuves. Toute dissimulation de preuve par l'accusation peut mener à l'annulation du procès.</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#81</span><span class="tag">Complot</span>
+            <h2>Conspiration</h2>
+            <span class="details-text">Tout membre qui s'associe à une ou plusieurs personnes pour commettre une infraction. Le crime est constitué dès qu'un acte concret est posé pour réaliser le plan.</span>
+            <span class="legal-note">Note : Si vous planifiez un vol d'avion et que vous volez les clés, vous êtes coupable.</span>
         </div>
 
         <div class="section-header">⚔️ CRIMES DE DEVOIR ET COMBAT</div>
@@ -56,37 +76,82 @@
         <div class="article-box">
             <span class="num">#85</span><span class="tag">Désertion</span>
             <h2>Désertion Aggravée</h2>
-            <span class="details-text">Le crime est constitué si le membre quitte son unité avec l'intention de ne jamais revenir, ou s'il quitte son poste pour éviter une mission périlleuse ou un service important (déploiement).</span>
-            <span class="legal-note">Note : Passible de la peine de mort si commis en temps de guerre face à l'ennemi.</span>
+            <span class="details-text">Quitter son unité avec l'intention de ne jamais revenir, ou pour éviter une mission périlleuse.</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#86</span><span class="tag">Devoir</span>
+            <h2>AWOL (Absence sans permission)</h2>
+            <span class="details-text">Manquer à l'appel, quitter son lieu de service ou ne pas se présenter à l'heure prescrite.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#92</span><span class="tag">Ordres</span>
             <h2>Désobéissance aux Ordres</h2>
-            <span class="details-text">Trois types de violations : 1. Violation d'un ordre général écrit. 2. Manquement au devoir par négligence. 3. Inexécution volontaire d'un ordre direct donné par un supérieur.</span>
-            <span class="legal-note">Note : L'ordre doit être "légal". Un soldat n'est pas tenu d'obéir à un ordre illégal.</span>
+            <span class="details-text">Violation d'un ordre général écrit, manquement par négligence ou inexécution volontaire d'un ordre direct.</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#93</span><span class="tag">Abus</span>
+            <h2>Cruauté et Mauvais Traitements</h2>
+            <span class="details-text">Tout membre qui se rend coupable de cruauté, d'oppression ou de mauvais traitements envers des subordonnés.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#99</span><span class="tag">Combat</span><h2>Mauvaise Conduite devant l'Ennemi</h2>
-            <span class="details-text">Comprend la fuite honteuse, l'abandon d'armes, de munitions ou de matériel devant l'adversaire, ou le fait de mettre en danger son unité par peur.</span>
-            <span class="legal-note">Note : La panique injustifiée est un crime majeur sous cet article.</span>
+            <span class="details-text">Fuite honteuse, abandon d'armes, ou mise en danger de l'unité par lâcheté ou panique injustifiée.</span>
+        </div>
+
+        <div class="section-header">🔥 INCIDENTS ET ORDRE PUBLIC</div>
+
+        <div class="article-box">
+            <span class="num">#106a</span><span class="tag">Espionnage</span>
+            <h2>Port de Signes Distinctifs Ennemis</h2>
+            <span class="details-text">Utiliser un uniforme ou un insigne ennemi pendant un combat pour tromper l'adversaire (Crime de guerre).</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#107</span><span class="tag">Mensonge</span>
+            <h2>Déclarations Officielles Fausses</h2>
+            <span class="details-text">Signer un document officiel ou faire une déclaration orale fausse avec l'intention de tromper un supérieur.</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#109</span><span class="tag">Civil</span>
+            <h2>Dégâts aux biens privés</h2>
+            <span class="details-text">Destruction, dégradation ou gaspillage volontaire de biens n'appartenant pas à l'armée (biens civils).</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#114</span><span class="tag">Désordre</span>
+            <h2>Provocation et Duel</h2>
+            <span class="details-text">Défier une personne en duel ou utiliser des provocations verbales visant à troubler la paix de la base.</span>
+        </div>
+
+        <div class="article-box">
+            <span class="num">#115</span><span class="tag">Santé</span>
+            <h2>Malingering (Simulation)</h2>
+            <span class="details-text">Simuler une maladie ou s'infliger une blessure pour éviter le service ou un déploiement.</span>
         </div>
 
         <div class="section-header">🚨 STUPÉFIANTS ET SÉCURITÉ</div>
 
         <div class="article-box">
+            <span class="num">#101</span><span class="tag">Sécurité</span>
+            <h2>Divulgation de Signaux Secrets</h2>
+            <span class="details-text">Divulguer ou changer sans autorisation un mot de passe ou un signal de reconnaissance.</span>
+        </div>
+
+        <div class="article-box">
             <span class="num">#112a</span><span class="tag">Drogue</span>
             <h2>Usage et Distribution</h2>
-            <span class="details-text">Interdiction absolue de la possession, de la consommation ou du trafic de substances contrôlées (Cocaïne, Marijuana, Opium, Méthamphétamines, LSD). L'introduction de drogues sur une base militaire aggrave la peine.</span>
-            <span class="legal-note">Note : Un test urinaire positif suffit généralement pour engager les poursuites.</span>
+            <span class="details-text">Possession, consommation ou trafic de substances contrôlées. L'introduction sur base aggrave la peine.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#113</span><span class="tag">Garde</span>
-            <h2>Faute de Sentinelle ou de Garde</h2>
-            <span class="details-text">S'applique à toute sentinelle trouvée endormie à son poste, ivre, ou ayant quitté son poste avant d'être officiellement relevée par la relève.</span>
-            <span class="legal-note">Note : Très sévèrement puni en zone de combat car cela met toute la base en danger.</span>
+            <h2>Faute de Sentinelle</h2>
+            <span class="details-text">Sentinelle trouvée endormie, ivre, ou ayant quitté son poste avant d'être relevée.</span>
         </div>
 
         <div class="section-header">🔪 CRIMES CONTRE LES PERSONNES</div>
@@ -94,67 +159,59 @@
         <div class="article-box">
             <span class="num">#118</span><span class="tag">Sang</span>
             <h2>Meurtre et Homicide</h2>
-            <span class="details-text">Le meurtre est défini par l'intention de tuer, d'infliger des blessures graves, ou d'agir avec une indifférence totale pour la vie humaine.</span>
-            <span class="legal-note">Note : Comprend le meurtre prémédité et le meurtre au cours d'un autre crime (vol, viol).</span>
+            <span class="details-text">Homicide avec intention de tuer ou indifférence totale pour la vie humaine.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#128</span><span class="tag">Violence</span>
             <h2>Agression (Assault)</h2>
-            <span class="details-text">Simple : Tentative ou menace de violence. Aggravée : Agression avec une arme dangereuse ou ayant causé des blessures corporelles graves (fractures, perte d'organe).</span>
-            <span class="legal-note">Note : Pointer une arme chargée vers quelqu'un est une agression aggravée.</span>
+            <span class="details-text">Simple (menace) ou Aggravée (usage d'arme ou blessures graves). Pointer une arme chargée est une agression aggravée.</span>
         </div>
 
-        <div class="section-header">📁 FRAUDES ET JUSTICE (LES ARTICLES CLÉS)</div>
+        <div class="section-header">📁 FRAUDES ET JUSTICE</div>
 
         <div class="article-box">
             <span class="num">#121</span><span class="tag">Vol</span>
             <h2>Larceny et Détournement</h2>
-            <span class="details-text">Le fait de prendre illégalement un bien avec l'intention de priver son propriétaire (armée ou civil) de son usage ou de sa valeur.</span>
-            <span class="legal-note">Note : Le "vol de propriété du gouvernement" est une circonstance aggravante.</span>
+            <span class="details-text">Prendre illégalement un bien pour en priver son propriétaire. Le vol de propriété d'État est aggravant.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#123</span><span class="tag">Fraude</span>
             <h2>Falsification (Forgery)</h2>
-            <span class="details-text">Fabrication ou altération de tout écrit (signature, ordre de mission, chèque, rapport médical) qui pourrait causer un préjudice légal ou financier à autrui.</span>
-            <span class="legal-note">Note : Signer à la place d'un officier supérieur tombe sous cet article.</span>
+            <span class="details-text">Altération de signatures, ordres de mission ou documents officiels à des fins de préjudice.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#131</span><span class="tag">Justice</span>
             <h2>Parjure</h2>
-            <span class="details-text">Toute fausse déclaration faite sous serment au cours d'une procédure judiciaire ou d'une enquête officielle, en sachant que l'information est fausse.</span>
+            <span class="details-text">Fausse déclaration sous serment lors d'une procédure judiciaire ou enquête.</span>
         </div>
 
         <div class="article-box">
             <span class="num">#131b</span><span class="tag">Justice</span>
             <h2>Obstruction à la Justice</h2>
-            <span class="details-text">Agir avec l'intention d'entraver les poursuites pénales : influencer des témoins, détruire des rapports de patrouille ou cacher des preuves physiques.</span>
+            <span class="details-text">Entraver les poursuites, influencer des témoins ou détruire des preuves physiques.</span>
+        </div>
+
+        <div class="section-header">💼 INFRACTIONS DE CONDUITE GÉNÉRALE</div>
+
+        <div class="article-box">
+            <span class="num">#134-4</span><span class="tag">Général</span>
+            <h2>Communication de Menaces</h2>
+            <span class="details-text">Communiquer une menace d'infliger des blessures ou des dommages matériels à autrui.</span>
         </div>
 
         <div class="article-box">
-            <span class="num">#103a</span><span class="tag">Espionnage</span>
-            <h2>Espionnage Informatique</h2>
-            <span class="details-text">Accès non autorisé à un ordinateur ou réseau militaire pour extraire des données classifiées ou nuire aux opérations de la défense nationale.</span>
+            <span class="num">#134-5</span><span class="tag">Général</span>
+            <h2>Dénonciation Calomnieuse</h2>
+            <span class="details-text">Faire une fausse accusation de crime contre un autre militaire pour nuire à sa carrière.</span>
         </div>
 
         <div class="article-box">
-            <span class="num">#121a</span><span class="tag">Fraude</span>
-            <h2>Utilisation Frauduleuse de Cartes</h2>
-            <span class="details-text">Utilisation de cartes de crédit, codes d'accès ou dispositifs de paiement militaires pour des dépenses personnelles ou non autorisées.</span>
-        </div>
-
-        <div class="article-box">
-            <span class="num">#132</span><span class="tag">Fraude</span>
-            <h2>Réclamations Frauduleuses</h2>
-            <span class="details-text">Présenter consciemment une fausse demande de paiement à l'État (fausses indemnités de déplacement, faux remboursements de matériel).</span>
-        </div>
-
-        <div class="article-box">
-            <span class="num">#134-2</span><span class="tag">Général</span>
-            <h2>Détention d'Armes Illégale</h2>
-            <span class="details-text">Sous-section de l'Article Général interdisant le port d'armes non enregistrées ou prohibées au sein des zones militaires.</span>
+            <span class="num">#134-3</span><span class="tag">Général</span>
+            <h2>Fraternisation Indue</h2>
+            <span class="details-text">Relations inappropriées entre officiers et personnel enrôlé compromettant l'autorité.</span>
         </div>
 
     </div>
