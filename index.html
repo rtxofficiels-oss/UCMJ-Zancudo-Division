@@ -2,141 +2,146 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCMJ | ZANCUDO DIVISION</title>
+    <title>UCMJ | BASE DE DONNÉES ZANCUDO</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap');
-        body { background-color: #000000; color: #a1a1aa; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
-        .article-card { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 20px; margin-bottom: 12px; cursor: pointer; border-radius: 4px; transition: all 0.2s; }
-        .article-card:hover { border-color: #2563eb; background: #0c1220; }
-        .details { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #1e293b; color: #d1d5db; line-height: 1.6; }
-        .details.active { display: block; }
-        .status-line { height: 4px; width: 40px; background: #2563eb; box-shadow: 0 0 10px #2563eb; }
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #2563eb; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        body { background: #000; color: #a1a1aa; font-family: 'Inter', sans-serif; }
+        .article-box { background: #09090b; border: 1px solid #18181b; padding: 20px; margin-bottom: 10px; border-radius: 4px; }
+        .article-box:hover { border-color: #2563eb; }
+        .num { color: #2563eb; font-weight: bold; margin-right: 10px; }
+        .tag { font-size: 10px; background: #1e1b4b; color: #818cf8; padding: 2px 6px; text-transform: uppercase; font-weight: bold; }
+        .desc { margin-top: 10px; color: #d1d5db; font-style: italic; display: block; }
+        input { background: #0a0a0a; border: 1px solid #27272a; color: white; padding: 10px; width: 100%; margin-bottom: 20px; outline: none; }
+        input:focus { border-color: #2563eb; }
     </style>
 </head>
-<body>
+<body class="p-6">
 
-    <header class="p-6 border-b border-zinc-900 sticky top-0 bg-black/95 backdrop-blur-sm z-50">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-4">
-                <div class="status-line"></div>
-                <div>
-                    <h1 class="text-2xl font-black text-white uppercase italic tracking-tighter">Zancudo Division</h1>
-                    <p class="text-[10px] font-mono text-blue-500 tracking-widest uppercase">UCMJ Master File • No Deletion Policy</p>
-                </div>
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-10 flex items-center gap-4">
+            <div style="width:5px; height:40px; background:#2563eb;"></div>
+            <div>
+                <h1 class="text-2xl font-black text-white italic uppercase">Zancudo Division</h1>
+                <p class="text-xs text-blue-500 uppercase tracking-widest">Master Archive - No Script Dependency</p>
             </div>
-            <div class="relative w-full max-w-md">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-zinc-600"></i>
-                <input type="text" id="search" placeholder="RECHERCHER (EX: 123, VOL, DROGUE)..." 
-                       class="w-full bg-zinc-900 border border-zinc-800 text-white text-sm pl-10 pr-4 py-3 outline-none focus:border-blue-600 transition-all">
+        </header>
+
+        <input type="text" id="searchBar" onkeyup="filterArticles()" placeholder="RECHERCHER UN ARTICLE OU UN MOT CLÉ...">
+
+        <div id="container">
+            <div class="article-box">
+                <span class="num">#1</span><span class="tag">Général</span>
+                <h2 class="text-white font-bold inline uppercase">Définitions</h2>
+                <span class="desc">Termes légaux : Juge-Avocat, Officier, Accusateur, Supérieur.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#2</span><span class="tag">Général</span>
+                <h2 class="text-white font-bold inline uppercase">Juridiction</h2>
+                <span class="desc">Personnes soumises au code : Active, Réservistes, Civils en guerre.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#7</span><span class="tag">Arrestation</span>
+                <h2 class="text-white font-bold inline uppercase">Appréhension</h2>
+                <span class="desc">Pouvoir légal d'arrestation avec cause probable.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#15</span><span class="tag">Sanction</span>
+                <h2 class="text-white font-bold inline uppercase">Article 15 (NJP)</h2>
+                <span class="desc">Punitions administratives immédiates pour fautes mineures.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#77</span><span class="tag">Crime</span>
+                <h2 class="text-white font-bold inline uppercase">Auteurs principaux</h2>
+                <span class="desc">Responsabilité partagée pour complices et donneurs d'ordres.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#85</span><span class="tag">Devoir</span>
+                <h2 class="text-white font-bold inline uppercase">Désertion</h2>
+                <span class="desc">Abandon de poste définitif ou fuite devant l'ennemi.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#86</span><span class="tag">Devoir</span>
+                <h2 class="text-white font-bold inline uppercase">AWOL</h2>
+                <span class="desc">Absence sans autorisation (Absent Without Leave).</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#90</span><span class="tag">Ordres</span>
+                <h2 class="text-white font-bold inline uppercase">Agression de Supérieur</h2>
+                <span class="desc">Violence physique ou désobéissance volontaire.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#92</span><span class="tag">Ordres</span>
+                <h2 class="text-white font-bold inline uppercase">Violation d'Ordre</h2>
+                <span class="desc">Non-respect d'un règlement ou ordre général.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#104</span><span class="tag">Guerre</span>
+                <h2 class="text-white font-bold inline uppercase">Aide à l'ennemi</h2>
+                <span class="desc">Soutien matériel, financier ou informationnel à l'ennemi.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#106</span><span class="tag">Guerre</span>
+                <h2 class="text-white font-bold inline uppercase">Espionnage</h2>
+                <span class="desc">Collecte de secrets militaires (Passible de la peine de mort).</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#107</span><span class="tag">Fraude</span>
+                <h2 class="text-white font-bold inline uppercase">Fausse déclaration</h2>
+                <span class="desc">Mensonge officiel oral ou écrit.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#112a</span><span class="tag">Drogue</span>
+                <h2 class="text-white font-bold inline uppercase">Stupéfiants</h2>
+                <span class="desc">Possession, usage ou trafic de substances illicites.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#118</span><span class="tag">Sang</span>
+                <h2 class="text-white font-bold inline uppercase">Meurtre</h2>
+                <span class="desc">Homicide volontaire ou prémédité.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#121</span><span class="tag">Vol</span>
+                <h2 class="text-white font-bold inline uppercase">Larceny</h2>
+                <span class="desc">Vol simple de biens privés ou militaires.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#123</span><span class="tag">Fraude</span>
+                <h2 class="text-white font-bold inline uppercase">Falsification</h2>
+                <span class="desc">Faux documents, signatures ou ordres falsifiés.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#128</span><span class="tag">Violence</span>
+                <h2 class="text-white font-bold inline uppercase">Assault</h2>
+                <span class="desc">Coups et blessures ou menace de violence physique.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#131</span><span class="tag">Justice</span>
+                <h2 class="text-white font-bold inline uppercase">Parjure</h2>
+                <span class="desc">Faire un faux témoignage sous serment.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#131b</span><span class="tag">Justice</span>
+                <h2 class="text-white font-bold inline uppercase">Obstruction</h2>
+                <span class="desc">Entraver une enquête ou cacher des preuves.</span>
+            </div>
+            <div class="article-box">
+                <span class="num">#134</span><span class="tag">Général</span>
+                <h2 class="text-white font-bold inline uppercase">Article Général</h2>
+                <span class="desc">Désordres divers : Adultère, dettes, inconduite.</span>
             </div>
         </div>
-    </header>
-
-    <main class="container mx-auto p-6 max-w-5xl">
-        <div id="articles-list">
-            </div>
-    </main>
+    </div>
 
     <script>
-        const ucmjData = [
-            { id: 1, cat: "Général", t: "Définitions", d: "Définitions des termes légaux : Officier, Juge-Avocat, Accusateur, Supérieur." },
-            { id: 2, cat: "Général", t: "Juridiction", d: "Personnes soumises au code : Active, Réservistes, Retraités, PG." },
-            { id: 7, cat: "Arrestation", t: "Appréhension", d: "Pouvoir légal d'arrestation avec cause probable." },
-            { id: 8, cat: "Arrestation", t: "Arrestation de déserteurs", d: "Pouvoir de capture des membres en fuite." },
-            { id: 9, cat: "Force", t: "Restriction / Confinement", d: "Placement aux arrêts ou en cellule de détention." },
-            { id: 13, cat: "Droit", t: "Punition pré-procès", d: "Interdiction de punir avant le verdict d'une cour martiale." },
-            { id: 15, cat: "Sanction", t: "Article 15 (NJP)", d: "Punitions administratives immédiates pour fautes mineures." },
-            { id: 77, cat: "Crime", t: "Auteurs principaux", d: "Responsabilité partagée pour complices et donneurs d'ordres." },
-            { id: 78, cat: "Crime", t: "Complice après les faits", d: "Aide fournie pour échapper à la capture ou au procès." },
-            { id: 80, cat: "Crime", t: "Tentative", d: "Acte concret pour commettre un crime, même s'il échoue." },
-            { id: 81, cat: "Crime", t: "Conspiration", d: "Accord entre 2+ personnes pour commettre une infraction." },
-            { id: 82, cat: "Crime", t: "Sollicitation", d: "Inciter à la désertion, mutinerie ou sédition." },
-            { id: 83, cat: "Fraude", t: "Engagement Frauduleux", d: "Enrôlement par mensonge ou dissimulation de faits." },
-            { id: 85, cat: "Devoir", t: "Désertion", d: "Abandon de poste définitif ou fuite devant l'ennemi." },
-            { id: 86, cat: "Devoir", t: "AWOL", d: "Absence sans autorisation (Absent Without Leave)." },
-            { id: 87, cat: "Devoir", t: "Manquement au mouvement", d: "Rater délibérément un départ de navire ou avion." },
-            { id: 88, cat: "Politique", t: "Mépris des officiels", d: "Paroles méprisantes contre le Président ou le Congrès." },
-            { id: 89, cat: "Ordres", t: "Irrespect Officier", d: "Comportement insultant envers un supérieur hiérarchique." },
-            { id: 90, cat: "Ordres", t: "Agression de Supérieur", d: "Violence physique ou désobéissance volontaire." },
-            { id: 91, cat: "Ordres", t: "Insubordination NCO", d: "Mépris ou désobéissance envers un sous-officier." },
-            { id: 92, cat: "Ordres", t: "Violation d'Ordre", d: "Non-respect d'un règlement ou ordre général." },
-            { id: 93, cat: "Abus", t: "Cruauté", d: "Mauvais traitements ou oppression des subordonnés." },
-            { id: 94, cat: "Mutinerie", t: "Mutinerie / Sédition", d: "Révolte armée ou collective contre l'autorité." },
-            { id: 95, cat: "Évasion", t: "Résistance à l'arrestation", d: "Lutte physique lors d'une interpellation légale." },
-            { id: 99, cat: "Combat", t: "Lâcheté", d: "Mauvaise conduite ou fuite face à l'adversaire." },
-            { id: 104, cat: "Trahison", t: "Aide à l'ennemi", d: "Soutien matériel, financier ou informationnel à l'ennemi." },
-            { id: 105, cat: "Captivité", t: "Inconduite Prisonnier", d: "Trahison ou maltraitance envers ses camarades PG." },
-            { id: 106, cat: "Trahison", t: "Espionnage", d: "Collecte de secrets militaires (Peine de mort possible)." },
-            { id: 107, cat: "Fraude", t: "Fausse déclaration", d: "Mensonge officiel oral ou écrit." },
-            { id: 108, cat: "Matériel", t: "Sabotage / Perte", d: "Destruction ou perte de biens de l'armée." },
-            { id: 109, cat: "Matériel", t: "Dégâts biens privés", d: "Destruction volontaire de biens civils." },
-            { id: 110, cat: "Marine", t: "Mise en danger navire", d: "Négligence causant un risque de naufrage." },
-            { id: 111, cat: "Véhicule", t: "Ivresse au volant", d: "Conduite sous alcool ou stupéfiants." },
-            { id: 112, cat: "Service", t: "Ivresse au service", d: "Ivre pendant une garde, patrouille ou mission." },
-            { id: 112a, cat: "Drogue", t: "Stupéfiants", d: "Possession, usage ou trafic de substances illicites." },
-            { id: 113, cat: "Garde", t: "Faute de Sentinelle", d: "Sentinelle endormie ou ayant quitté son poste." },
-            { id: 116, cat: "Désordre", t: "Émeute", d: "Participation à un trouble violent de l'ordre public." },
-            { id: 117, cat: "Désordre", t: "Provocation", d: "Paroles ou gestes visant à créer une bagarre." },
-            { id: 118, cat: "Sang", t: "Meurtre", d: "Homicide volontaire ou prémédité." },
-            { id: 119, cat: "Sang", t: "Homicide involontaire", d: "Tuer par négligence ou lors d'une rixe." },
-            { id: 120, cat: "Sexe", t: "Viol / Agression sexuelle", d: "Actes sexuels non consentis." },
-            { id: 120a, cat: "Sexe", t: "Stalking", d: "Harcèlement et traque répétés d'une personne." },
-            { id: 121, cat: "Vol", t: "Larceny", d: "Vol simple de biens privés ou militaires." },
-            { id: 122, cat: "Vol", t: "Braquage", d: "Vol avec violence ou menaces directes." },
-            { id: 123, cat: "Fraude", t: "Falsification", d: "Faux documents, signatures ou ordres falsifiés." },
-            { id: 123a, cat: "Fraude", t: "Chèques sans provision", d: "Fraude financière par instruments bancaires." },
-            { id: 128, cat: "Violence", t: "Assault", d: "Coups et blessures ou menace de violence." },
-            { id: 131, cat: "Justice", t: "Parjure", d: "Faire un faux témoignage sous serment." },
-            { id: 131a, cat: "Justice", t: "Subornation", d: "Pousser autrui à commettre un parjure." },
-            { id: 131b, cat: "Justice", t: "Obstruction", d: "Entraver une enquête ou cacher des preuves." },
-            { id: 132, cat: "Fraude", t: "Fraude d'État", d: "Falsifier des réclamations d'argent officielles." },
-            { id: 133, cat: "Honneur", t: "Conduite d'Officier", d: "Acte déshonorant pour le rang d'officier." },
-            { id: 134, cat: "Général", t: "Article Général", d: "Désordres divers : Adultère, dettes, inconduite." },
-            { id: 138, cat: "Droit", t: "Plainte", d: "Recours légal contre une injustice d'un supérieur." }
-        ];
-
-        function render(items) {
-            const list = document.getElementById('articles-list');
-            list.innerHTML = "";
-            items.forEach(a => {
-                const div = document.createElement('div');
-                div.className = "article-card";
-                div.innerHTML = `
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center gap-4">
-                            <span class="font-mono text-blue-500 font-bold">#${a.id}</span>
-                            <div>
-                                <h2 class="text-white font-bold text-sm uppercase">${a.t}</h2>
-                                <span class="text-[9px] text-blue-400 font-bold uppercase">${a.cat}</span>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-zinc-800 text-xs"></i>
-                    </div>
-                    <div class="details">
-                        <p class="italic text-zinc-400">"${a.d}"</p>
-                    </div>
-                `;
-                div.onclick = () => {
-                    const d = div.querySelector('.details');
-                    d.style.display = d.style.display === 'block' ? 'none' : 'block';
-                };
-                list.appendChild(div);
-            });
+        function filterArticles() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let boxes = document.getElementsByClassName('article-box');
+            for (let i = 0; i < boxes.length; i++) {
+                let text = boxes[i].innerText.toLowerCase();
+                boxes[i].style.display = text.includes(input) ? "" : "none";
+            }
         }
-
-        document.getElementById('search').addEventListener('input', (e) => {
-            const v = e.target.value.toLowerCase();
-            const f = ucmjData.filter(a => a.t.toLowerCase().includes(v) || a.id.toString().includes(v));
-            render(f);
-        });
-
-        render(ucmjData);
     </script>
 </body>
 </html>
