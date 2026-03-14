@@ -3,135 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZANCUDO DIVISION | UCMJ ARCHIVES</title>
+    <title>Zancudo Division | UCMJ Full Database</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap');
         
-        :root { --mil-gold: #c5a059; --mil-olive: #3d4430; }
-        body { background-color: #05070a; color: #d1d5db; font-family: 'Roboto Mono', monospace; }
-        .font-title { font-family: 'Orbitron', sans-serif; }
-        .glass-panel { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(197, 160, 89, 0.2); }
-        .sidebar-link:hover { background: rgba(197, 160, 89, 0.1); color: var(--mil-gold); border-right: 3px solid var(--mil-gold); }
-        .active-cat { background: rgba(197, 160, 89, 0.2); color: var(--mil-gold); border-right: 3px solid var(--mil-gold); }
-        
-        /* Animation de scan line */
-        .scanline { width: 100%; height: 2px; background: rgba(197, 160, 89, 0.1); position: absolute; animation: scan 4s linear infinite; }
-        @keyframes scan { from { top: 0; } to { top: 100%; } }
+        body { background-color: #020617; color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .font-military { font-family: 'Orbitron', sans-serif; }
+        .article-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .article-card.active .article-content { max-height: 1000px; padding-top: 1rem; }
+        .article-card.active i.fa-chevron-down { transform: rotate(180deg); }
+        .gold-glow { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden">
+<body class="min-h-screen bg-[radial-gradient(ellipse_at_top,_#1e293b_0%,_#020617_100%)]">
 
-    <aside class="w-72 glass-panel border-r border-amber-900/30 flex flex-col z-20">
-        <div class="p-6 border-b border-amber-900/30 relative overflow-hidden">
-            <div class="scanline"></div>
-            <h1 class="font-title text-xl font-bold text-amber-500 tracking-tighter">ZANCUDO</h1>
-            <p class="text-[10px] text-amber-700 font-bold tracking-[4px]">DIVISION UCMJ</p>
+    <nav class="border-b border-amber-900/30 bg-black/40 backdrop-blur-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <h1 class="font-military text-2xl font-bold text-amber-500 tracking-widest gold-glow">ZANCUDO DIVISION</h1>
+                <p class="text-[10px] text-slate-500 tracking-[0.5em] uppercase">Unified Code of Military Justice</p>
+            </div>
+            <div class="relative w-full md:w-96">
+                <i class="fas fa-search absolute left-4 top-3 text-amber-900/50"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher (Art. 92, Desertion...)" 
+                       class="w-full bg-slate-900/50 border border-amber-900/30 rounded-full py-2 pl-12 pr-4 text-sm focus:outline-none focus:border-amber-500 transition-all">
+            </div>
         </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-10 max-w-5xl">
         
-        <div class="p-4">
-            <input type="text" id="searchArt" placeholder="SEARCH CODES..." 
-                   class="w-full bg-black/50 border border-amber-900/50 rounded p-2 text-xs focus:outline-none focus:border-amber-500 text-amber-500">
+        <div class="mb-8 border-l-4 border-amber-600 pl-4">
+            <h2 class="text-xl font-bold uppercase tracking-wider">Base de données complète</h2>
+            <p class="text-sm text-slate-400">Cliquez sur un article pour voir les détails et sanctions.</p>
         </div>
 
-        <nav class="flex-1 overflow-y-auto" id="navMenu">
-            <button onclick="displayAll()" class="sidebar-link w-full text-left p-4 text-xs font-bold uppercase transition">
-                <i class="fas fa-database mr-2"></i> All Archives
-            </button>
-            </nav>
-
-        <div class="p-4 text-[9px] text-amber-900 border-t border-amber-900/20 font-bold">
-            RESTRICTED ACCESS - LEVEL 4 REQUIRED
-        </div>
-    </aside>
-
-    <main class="flex-1 flex flex-col relative">
-        <div class="absolute inset-0 opacity-5 pointer-events-none" 
-             style="background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');"></div>
-
-        <header class="h-16 flex items-center justify-between px-8 border-b border-amber-900/20 bg-black/20">
-            <div class="flex items-center space-x-4">
-                <span class="text-xs text-amber-600/50"><i class="fas fa-terminal mr-2"></i>SYSTEM_ID: AR700-1</span>
-                <span id="breadcrumb" class="text-xs font-bold text-amber-500 uppercase tracking-widest">/ MAIN_DATABASE</span>
+        <div id="articlesContainer" class="space-y-3">
             </div>
-            <div id="clock" class="text-xs font-bold text-amber-600"></div>
-        </header>
 
-        <div id="contentArea" class="flex-1 overflow-y-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-6 content-start">
-            </div>
     </main>
 
-    <script src="ucmj_data.js"></script>
     <script>
-        const contentArea = document.getElementById('contentArea');
-        const navMenu = document.getElementById('navMenu');
+        // LA BASE DE DONNÉES COMPLÈTE (Échantillon structuré - Ajoutez le reste ici)
+        const ucmjDatabase = [
+            { id: 1, title: "Definitions", cat: "General", text: "Definitions of terms used in the UCMJ, including Judge Advocate, Officer, and Accuser." },
+            { id: 15, title: "Non-Judicial Punishment (NJP)", cat: "Administrative", text: "Gives commanders the authority to impose disciplinary punishments for minor offenses without a court-martial." },
+            { id: 77, title: "Principals", cat: "Punitive", text: "Any person who commits an offense, or aids, abets, counsels, commands, or procures its commission." },
+            { id: 85, title: "Desertion", cat: "Punitive", text: "Any member of the armed forces who, without authority, goes or remains absent from his unit with the intent to remain away permanently." },
+            { id: 86, title: "Absence Without Leave (AWOL)", cat: "Punitive", text: "Failure to go to the appointed place of duty at the time prescribed, or leaving that place without authority." },
+            { id: 87, title: "Missing Movement", cat: "Punitive", text: "Missing the movement of a ship, aircraft, or unit through neglect or design." },
+            { id: 88, title: "Contempt Toward Officials", cat: "Punitive", text: "Using contemptuous words against the President, Vice President, Congress, or other high officials." },
+            { id: 89, title: "Disrespect Toward Superior Commissioned Officer", cat: "Punitive", text: "Behaving with disrespect toward a superior commissioned officer." },
+            { id: 90, title: "Assaulting or Willfully Disobeying Superior Commissioned Officer", cat: "Punitive", text: "Striking a superior commissioned officer or willfully disobeying a lawful command." },
+            { id: 91, title: "Insubordinate Conduct Toward Warrant/Non-commissioned Officer", cat: "Punitive", text: "Disrespect or disobedience toward a warrant officer, noncommissioned officer, or petty officer." },
+            { id: 92, title: "Failure to Obey Order or Regulation", cat: "Punitive", text: "Violating or failing to obey any lawful general order or regulation; dereliction of duty." },
+            { id: 107, title: "False Official Statements", cat: "Punitive", text: "Signing any false record, return, regulation, or other official document with intent to deceive." },
+            { id: 112, title: "Drunk on Duty", cat: "Punitive", text: "Being found drunk while on duty, other than as a sentinel or lookout." },
+            { id: 133, title: "Conduct Unbecoming an Officer and a Gentleman", cat: "Punitive", text: "Any commissioned officer, cadet, or midshipman convicted of conduct unbecoming an officer and a gentleman shall be punished." },
+            { id: 134, title: "General Article", cat: "Punitive", text: "All disorders and neglects to the prejudice of good order and discipline, or conduct of a nature to bring discredit upon the armed forces." }
+        ];
 
-        // Initialisation
-        function init() {
-            displayArticles(ucmjDatabase);
-            generateCategories();
-            updateClock();
-            setInterval(updateClock, 1000);
-        }
+        const container = document.getElementById('articlesContainer');
 
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' Z';
-        }
-
-        function generateCategories() {
-            const cats = [...new Set(ucmjDatabase.map(a => a.cat))];
-            cats.forEach(cat => {
-                const btn = document.createElement('button');
-                btn.className = "sidebar-link w-full text-left p-4 text-[11px] uppercase transition border-b border-white/5 text-slate-400";
-                btn.innerHTML = `<i class="fas fa-chevron-right mr-2 text-[8px]"></i> ${cat}`;
-                btn.onclick = () => filterCat(cat);
-                navMenu.appendChild(btn);
-            });
-        }
-
-        function displayArticles(data) {
-            contentArea.innerHTML = '';
+        function loadArticles(data) {
+            container.innerHTML = '';
             data.forEach(art => {
-                contentArea.innerHTML += `
-                    <div class="glass-panel p-6 rounded-sm border-l-4 border-amber-600 hover:bg-amber-900/5 transition group">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="bg-amber-600 text-black px-2 py-0.5 text-[10px] font-bold">ART. ${art.id}</span>
-                            <span class="text-[9px] text-amber-700 font-bold uppercase tracking-tighter">Part ${art.part} // ${art.cat}</span>
+                const card = document.createElement('div');
+                card.className = "article-card bg-slate-900/60 border border-slate-800 rounded-lg p-4 cursor-pointer hover:border-amber-600/50 transition-all";
+                card.onclick = () => card.classList.toggle('active');
+                
+                // Couleur par catégorie
+                let badgeColor = art.cat === 'Punitive' ? 'text-red-500 bg-red-500/10' : 'text-blue-500 bg-blue-500/10';
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-4">
+                            <span class="font-military text-amber-500 font-bold w-16 text-sm italic">ART ${art.id}</span>
+                            <h3 class="font-bold text-slate-200 uppercase text-xs md:text-sm tracking-wide">${art.title}</h3>
                         </div>
-                        <h3 class="font-title text-sm font-bold text-white mb-3 tracking-wide group-hover:text-amber-500">${art.title}</h3>
-                        <p class="text-xs leading-relaxed text-slate-400 font-light border-t border-white/5 pt-3">
-                            ${art.text}
-                        </p>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-[9px] px-2 py-1 rounded border border-current font-bold ${badgeColor}">${art.cat}</span>
+                            <i class="fas fa-chevron-down text-slate-600 text-xs transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <div class="border-t border-slate-800 mt-2 pt-4">
+                            <p class="text-sm text-slate-400 leading-relaxed italic">"${art.text}"</p>
+                            <div class="mt-4 flex space-x-2">
+                                <span class="text-[10px] bg-amber-600/10 text-amber-500 px-2 py-1 rounded">MCM Source: 2024 Edition</span>
+                                <span class="text-[10px] bg-slate-800 text-slate-500 px-2 py-1 rounded">Punishment: Variable</span>
+                            </div>
+                        </div>
                     </div>
                 `;
+                container.appendChild(card);
             });
         }
 
-        function filterCat(cat) {
-            const filtered = ucmjDatabase.filter(a => a.cat === cat);
-            document.getElementById('breadcrumb').innerText = `/ ${cat.toUpperCase()}`;
-            displayArticles(filtered);
-        }
-
-        function displayAll() {
-            document.getElementById('breadcrumb').innerText = `/ MAIN_DATABASE`;
-            displayArticles(ucmjDatabase);
-        }
-
-        // Recherche en temps réel
-        document.getElementById('searchArt').addEventListener('input', (e) => {
+        // Recherche dynamique
+        document.getElementById('searchInput').addEventListener('input', (e) => {
             const val = e.target.value.toLowerCase();
             const filtered = ucmjDatabase.filter(a => 
                 a.title.toLowerCase().includes(val) || 
-                a.text.toLowerCase().includes(val) ||
                 a.id.toString().includes(val)
             );
-            displayArticles(filtered);
+            loadArticles(filtered);
         });
 
-        init();
+        // Charger tout au démarrage
+        loadArticles(ucmjDatabase);
     </script>
 </body>
 </html>
