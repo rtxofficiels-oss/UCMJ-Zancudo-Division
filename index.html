@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZANCUDO DIVISION | UCMJ FULL DATABASE</title>
+    <title>ZANCUDO DIVISION | ARCHIVES UCMJ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -13,7 +13,10 @@
         .ucmj-card { border-left: 3px solid #b45309; background: rgba(15, 23, 42, 0.6); transition: 0.2s; cursor: pointer; margin-bottom: 0.5rem; }
         .ucmj-card:hover { background: rgba(180, 83, 9, 0.1); border-left-width: 8px; }
         .content-hidden { display: none; }
-        .section-title { color: #b45309; border-bottom: 1px solid #b45309; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; font-size: 0.8rem; font-weight: bold; }
+        .section-title { color: #b45309; border-bottom: 1px solid #b45309; margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+        .badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 2px; font-weight: bold; text-transform: uppercase; }
+        .badge-punitive { background: rgba(220, 38, 38, 0.2); color: #ef4444; border: 1px solid #ef4444; }
+        .badge-admin { background: rgba(37, 99, 235, 0.2); color: #3b82f6; border: 1px solid #3b82f6; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -22,10 +25,10 @@
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <div>
                 <h1 class="font-mil text-3xl text-amber-600 tracking-tighter italic">ZANCUDO DIVISION</h1>
-                <p class="text-[10px] text-amber-900 font-bold uppercase tracking-[0.5em]">UCMJ FULL ARCHIVE / SECURE</p>
+                <p class="text-[10px] text-amber-900 font-bold uppercase tracking-[0.5em]">BASE DE DONNÉES UCMJ / ACCÈS SÉCURISÉ</p>
             </div>
             <div class="mt-4 md:mt-0 relative">
-                <input type="text" id="search" placeholder="RECHERCHER UN ARTICLE OU UN MOT..." 
+                <input type="text" id="search" placeholder="RECHERCHER (EX: ART 92, VOL, DROGUE...)" 
                        class="bg-black border border-amber-900/50 rounded-none py-2 px-10 text-amber-500 focus:border-amber-500 outline-none w-80 text-xs">
                 <i class="fas fa-search absolute left-3 top-3 text-amber-900/50 text-xs"></i>
             </div>
@@ -39,63 +42,37 @@
 
     <script>
         const ucmjData = [
-            // PART I TO IX (PROCEDURE)
-            { id: 1, s: "GENERAL", t: "Definitions", d: "Termes officiels : Officier, Juge-Avocat, Accusateur." },
-            { id: 2, s: "GENERAL", t: "Persons Subject to this Chapter", d: "Militaires actifs, réservistes, prisonniers de guerre." },
-            { id: 3, s: "GENERAL", t: "Jurisdiction to Try Certain Persons", d: "Compétence après la fin de service." },
-            { id: 5, s: "GENERAL", t: "Territorial Applicability", d: "S'applique partout dans le monde." },
-            { id: 7, s: "APPREHENSION", t: "Apprehension", d: "Pouvoir d'arrestation des suspects." },
-            { id: 15, s: "NJP", t: "Non-Judicial Punishment", d: "Sanctions administratives (Article 15)." },
-            { id: 16, s: "COURTS", t: "Courts-martial classified", d: "Types de tribunaux : General, Special, Summary." },
-
-            // PART X - PUNITIVE ARTICLES (77-134)
-            { id: 77, s: "PUNITIVE", t: "Principals", d: "Responsabilité des auteurs et complices." },
-            { id: 78, s: "PUNITIVE", t: "Accessory after the fact", d: "Complicité après les faits." },
-            { id: 80, s: "PUNITIVE", t: "Attempts", d: "Tentatives d'infractions." },
-            { id: 81, s: "PUNITIVE", t: "Conspiracy", d: "Complot entre deux personnes ou plus." },
-            { id: 82, s: "PUNITIVE", t: "Solicitation", d: "Incitation à la désertion ou mutinerie." },
-            { id: 83, s: "PUNITIVE", t: "Fraudulent enlistment", d: "Engagement par tromperie." },
-            { id: 85, s: "PUNITIVE", t: "Desertion", d: "Abandon définitif de l'unité." },
-            { id: 86, s: "PUNITIVE", t: "AWOL", d: "Absence sans permission / Manque à l'appel." },
-            { id: 87, s: "PUNITIVE", t: "Missing movement", d: "Manquer le départ d'un navire ou avion." },
-            { id: 88, s: "PUNITIVE", t: "Contempt toward officials", d: "Mépris envers les élus civils." },
-            { id: 89, s: "PUNITIVE", t: "Disrespect toward superior officer", d: "Manque de respect envers un officier." },
-            { id: 90, s: "PUNITIVE", t: "Assault / Disobeying officer", d: "Agression ou désobéissance volontaire." },
-            { id: 91, s: "PUNITIVE", t: "Insubordinate conduct", d: "Insubordination envers un NCO ou adjudant." },
-            { id: 92, s: "PUNITIVE", t: "Failure to obey order", d: "Violation de règlement ou dérive de fonction." },
-            { id: 93, s: "PUNITIVE", t: "Cruelty and maltreatment", d: "Mauvais traitements envers subordonnés." },
-            { id: 94, s: "PUNITIVE", t: "Mutiny or sedition", d: "Révolte collective contre l'autorité." },
-            { id: 95, s: "PUNITIVE", t: "Resistance / Breach of arrest", d: "Évasion ou résistance lors d'une arrestation." },
-            { id: 99, s: "PUNITIVE", t: "Misbehavior before the enemy", d: "Lâcheté ou faute grave au combat." },
-            { id: 104, s: "PUNITIVE", t: "Aiding the enemy", d: "Assistance directe à l'ennemi." },
-            { id: 106, s: "PUNITIVE", t: "Spies", d: "Espionnage (Temps de guerre)." },
-            { id: 107, s: "PUNITIVE", t: "False official statements", d: "Mensonges dans les rapports officiels." },
-            { id: 108, s: "PUNITIVE", t: "Loss / Damage military property", d: "Vente ou destruction de matériel militaire." },
-            { id: 109, s: "PUNITIVE", t: "Waste / Destruction of other property", d: "Dommages aux biens civils." },
-            { id: 111, s: "PUNITIVE", t: "Drunken or reckless operation", d: "Conduite dangereuse de véhicules." },
-            { id: 112, s: "PUNITIVE", t: "Drunk on duty", d: "Ivresse en service." },
-            { id: 112, t: "Controlled substances", d: "Usage ou trafic de drogues." },
-            { id: 113, s: "PUNITIVE", t: "Misbehavior of sentinel", d: "Sentinelle endormie ou ivre." },
-            { id: 115, s: "PUNITIVE", t: "Malingering", d: "Feindre une maladie pour éviter le service." },
-            { id: 116, s: "PUNITIVE", t: "Riot or breach of peace", d: "Participation à une émeute." },
-            { id: 117, s: "PUNITIVE", t: "Provoking speeches", d: "Gestes ou paroles provocatrices." },
-            { id: 118, s: "PUNITIVE", t: "Murder", d: "Homicide volontaire." },
-            { id: 119, s: "PUNITIVE", t: "Manslaughter", d: "Homicide involontaire." },
-            { id: 120, s: "PUNITIVE", t: "Rape / Sexual assault", d: "Viol et agressions sexuelles." },
-            { id: 121, s: "PUNITIVE", t: "Larceny", d: "Vol et détournement de biens." },
-            { id: 122, s: "PUNITIVE", t: "Robbery", d: "Vol avec violence." },
-            { id: 123, s: "PUNITIVE", t: "Forgery", d: "Faux et usage de faux." },
-            { id: 128, s: "PUNITIVE", t: "Assault", d: "Agression ou tentative d'agression." },
-            { id: 129, s: "PUNITIVE", t: "Burglary", d: "Cambriolage." },
-            { id: 131, s: "PUNITIVE", t: "Perjury", d: "Faux témoignage sous serment." },
-            { id: 132, s: "PUNITIVE", t: "Fraud against the US", d: "Fraude contre le gouvernement." },
-            { id: 133, s: "PUNITIVE", t: "Conduct unbecoming an officer", d: "Conduite indigne d'un officier." },
-            { id: 134, s: "PUNITIVE", t: "General Article", d: "Désordres nuisant à la discipline." },
-
-            // PART XI - MISC
-            { id: 135, s: "MISC", t: "Courts of inquiry", d: "Mise en place de commissions d'enquête." },
-            { id: 137, s: "MISC", t: "Articles to be explained", d: "Obligation d'expliquer le code aux soldats." },
-            { id: 138, s: "MISC", t: "Complaints of wrongs", d: "Droit de recours contre un supérieur." }
+            { id: 1, s: "Provisions Générales", t: "Définitions", d: "Établit les définitions légales pour tout le code. Définit les termes tels que 'Officier', 'Juge-Avocat', 'Accusateur' et 'Supérieur'." },
+            { id: 2, s: "Provisions Générales", t: "Personnes soumises au code", d: "Définit qui doit obéir à l'UCMJ : militaires actifs, réservistes en service, membres de la Garde Nationale et prisonniers de guerre." },
+            { id: 7, s: "Arrestation et Détention", t: "Appréhension", d: "L'appréhension est l'acte de placer une personne en garde à vue. Autorise les officiers et sous-officiers à arrêter les suspects de crimes militaires." },
+            { id: 15, s: "Punition Non-Judiciaire", t: "Article 15 (NJP)", d: "Permet aux commandants d'imposer des sanctions disciplinaires pour des infractions mineures sans passer par une cour martiale (ex: corvées, retenue de solde, réduction de grade)." },
+            { id: 77, s: "Articles Punitifs", type: "P", t: "Auteurs principaux (Principals)", d: "Toute personne qui commet une infraction, ou qui aide, encourage ou ordonne sa commission, est responsable au même titre que l'auteur direct." },
+            { id: 78, s: "Articles Punitifs", type: "P", t: "Complice après les faits", d: "S'applique à quiconque reçoit, réconforte ou aide un criminel pour empêcher sa capture ou sa punition." },
+            { id: 80, s: "Articles Punitifs", type: "P", t: "Tentative", d: "Punition pour avoir tenté de commettre un crime, même si l'acte n'a pas été finalisé." },
+            { id: 81, s: "Articles Punitifs", type: "P", t: "Conspiration", d: "Accord entre deux personnes ou plus pour commettre une infraction, suivi d'un acte concret pour réaliser ce plan." },
+            { id: 82, s: "Articles Punitifs", type: "P", t: "Sollicitation", d: "Le fait de demander ou d'inciter une autre personne à déserter, à se mutiner ou à commettre un acte de sédition." },
+            { id: 85, s: "Articles Punitifs", type: "P", t: "Désertion", d: "Abandon de son unité ou de son poste avec l'intention de ne pas y revenir, ou pour éviter un service important ou périlleux." },
+            { id: 86, s: "Articles Punitifs", type: "P", t: "Absence non autorisée (AWOL)", d: "Fait de ne pas se présenter à son lieu de service à l'heure prescrite, ou de quitter son poste sans autorisation officielle." },
+            { id: 87, s: "Articles Punitifs", type: "P", t: "Manquement au mouvement", d: "Manquer le départ d'un navire, d'un avion ou d'une unité avec laquelle on a l'ordre de partir, par négligence ou intentionnellement." },
+            { id: 89, s: "Articles Punitifs", type: "P", t: "Manque de respect envers un officier", d: "Comportement irrespectueux en paroles ou en actes envers un officier supérieur." },
+            { id: 90, s: "Articles Punitifs", type: "P", t: "Agression ou désobéissance à un officier", d: "Frapper un officier supérieur ou refuser délibérément d'obéir à un ordre direct et légal." },
+            { id: 91, s: "Articles Punitifs", type: "P", t: "Insubordination envers un Sous-Officier", d: "Mépris ou désobéissance envers un adjudant ou un sous-officier (NCO) dans l'exercice de ses fonctions." },
+            { id: 92, s: "Articles Punitifs", type: "P", t: "Violation d'un ordre ou règlement", d: "L'article le plus utilisé. Sanctionne la violation d'un ordre général, d'un règlement, ou la négligence dans l'exécution de ses devoirs." },
+            { id: 93, s: "Articles Punitifs", type: "P", t: "Cruauté et mauvais traitements", d: "Sanctionne tout acte de cruauté, d'oppression ou de mauvais traitement infligé à un subordonné." },
+            { id: 94, s: "Articles Punitifs", type: "P", t: "Mutinerie et Sédition", d: "Révolte collective contre l'autorité légitime ou refus d'obéir en groupe. Passible de la peine de mort." },
+            { id: 104, s: "Articles Punitifs", type: "P", t: "Aide à l'ennemi", d: "Fournir des renseignements, des armes, des munitions ou des provisions à l'ennemi." },
+            { id: 107, s: "Articles Punitifs", type: "P", t: "Fausses déclarations officielles", d: "Fait de signer un document officiel faux ou de faire une déclaration mensongère avec l'intention de tromper." },
+            { id: 108, s: "Articles Punitifs", type: "P", t: "Dommage/Perte de matériel militaire", d: "Vendre, détériorer, détruire ou perdre du matériel appartenant à l'armée par négligence ou volonté." },
+            { id: 112, s: "Articles Punitifs", type: "P", t: "Ivresse en service", d: "Être trouvé en état d'ivresse pendant l'exécution de son service ou de ses fonctions." },
+            { id: 112, s: "Articles Punitifs", type: "P", t: "Usage de stupéfiants", d: "Possession, usage, fabrication ou trafic de drogues et substances contrôlées." },
+            { id: 113, s: "Articles Punitifs", type: "P", t: "Infraction de sentinelle", d: "Sentinelle ou guetteur trouvé endormi à son poste, ivre, ou ayant quitté son poste avant d'être relevé." },
+            { id: 115, s: "Articles Punitifs", type: "P", t: "Malingering (Simulacre)", d: "Feindre une maladie, une blessure ou se blesser volontairement pour éviter le service ou le combat." },
+            { id: 117, s: "Articles Punitifs", type: "P", t: "Paroles ou gestes provocateurs", d: "Utiliser des paroles ou des gestes menaçants ou provocateurs envers une autre personne soumise au code." },
+            { id: 118, s: "Articles Punitifs", type: "P", t: "Meurtre", d: "Homicide commis avec l'intention de tuer, d'infliger des blessures graves, ou par acte dangereux montrant un mépris pour la vie." },
+            { id: 121, s: "Articles Punitifs", type: "P", t: "Vol et détournement", d: "Prendre illégalement la propriété d'autrui ou du gouvernement avec l'intention d'en priver le propriétaire." },
+            { id: 128, s: "Articles Punitifs", type: "P", t: "Agression", d: "Tentative ou exécution d'une violence physique sur une autre personne." },
+            { id: 133, s: "Articles Punitifs", type: "P", t: "Conduite indigne d'un officier", d: "Tout acte commis par un officier qui est contraire à l'honneur et à la décence attendus d'un gentleman." },
+            { id: 134, s: "Articles Punitifs", type: "P", t: "Article Général", d: "Couvre toutes les fautes non citées ailleurs mais qui nuisent au bon ordre, à la discipline ou discréditent les forces armées." }
         ];
 
         const list = document.getElementById('articles-list');
@@ -108,20 +85,24 @@
                 if(a.s !== currentSec) {
                     const sec = document.createElement('div');
                     sec.className = "section-title font-mil";
-                    sec.innerText = `CHAPTER // ${a.s}`;
+                    sec.innerText = a.s;
                     list.appendChild(sec);
                     currentSec = a.s;
                 }
                 const card = document.createElement('div');
-                card.className = "ucmj-card p-4 rounded-sm shadow-xl";
+                card.className = "ucmj-card p-4 shadow-xl";
                 card.onclick = () => card.querySelector('.desc').classList.toggle('content-hidden');
+                
+                const badge = a.type === "P" ? '<span class="badge badge-punitive">Punitif</span>' : '<span class="badge badge-admin">Procédure</span>';
+
                 card.innerHTML = `
-                    <div class="flex justify-between items-center text-xs md:text-sm">
+                    <div class="flex justify-between items-center text-sm">
                         <div class="flex items-center gap-4">
-                            <span class="font-mil text-amber-600">#${a.id}</span>
+                            <span class="font-mil text-amber-600">ART ${a.id}</span>
                             <h2 class="font-bold uppercase tracking-widest">${a.t}</h2>
+                            ${badge}
                         </div>
-                        <i class="fas fa-plus text-amber-900"></i>
+                        <i class="fas fa-plus text-amber-900 text-xs"></i>
                     </div>
                     <div class="desc content-hidden mt-4 pt-4 border-t border-amber-900/10 text-slate-400 text-xs italic leading-relaxed">
                         "${a.d}"
