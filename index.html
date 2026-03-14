@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UCMJ | OMNI-ARCHIVE | ZANCUDO DIVISION</title>
+    <title>UCMJ | FULL MASTER ARCHIVE | ZANCUDO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=JetBrains+Mono&display=swap');
-        body { background: #000000; color: #a1a1aa; font-family: 'Inter', sans-serif; }
+        body { background: #000000; color: #a1a1aa; font-family: 'Inter', sans-serif; margin: 0; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .article-card { background: #09090b; border: 1px solid #18181b; transition: all 0.3s ease; border-radius: 4px; }
+        .article-card { background: #09090b; border: 1px solid #18181b; transition: all 0.3s ease; border-radius: 4px; margin-bottom: 12px; padding: 20px; cursor: pointer; }
         .article-card:hover { border-color: #3b82f6; background: #0c0c0e; box-shadow: 0 0 25px rgba(59, 130, 246, 0.15); }
         .category-tag { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; background: #1e1b4b; color: #818cf8; border-radius: 2px; font-weight: bold; }
-        .content-hidden { display: none; }
+        .details { margin-top: 15px; padding-top: 15px; border-top: 1px solid #18181b; color: #d4d4d8; display: none; line-height: 1.6; }
+        .details.show { display: block; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #2563eb; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -24,76 +25,77 @@
     <header class="p-8 border-b border-zinc-900 bg-black/90 backdrop-blur-md sticky top-0 z-50">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-4">
-                <div class="h-12 w-1 bg-blue-600 shadow-[0_0_10px_#2563eb]"></div>
+                <div style="height: 45px; width: 4px; background: #2563eb; box-shadow: 0 0 15px #2563eb;"></div>
                 <div>
                     <h1 class="text-2xl font-black tracking-tighter text-white uppercase italic">Zancudo Division</h1>
-                    <p class="font-mono text-[10px] text-blue-500 uppercase tracking-widest leading-none">UCMJ Omniscience • Terminal v3.5</p>
+                    <p class="font-mono text-[10px] text-blue-500 uppercase tracking-widest leading-none">UCMJ Registry • Full Access Granted</p>
                 </div>
             </div>
             <div class="relative w-full max-w-2xl">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-zinc-600"></i>
-                <input type="text" id="search" placeholder="NUMÉRO, MOT-CLÉ OU CATÉGORIE..." 
+                <input type="text" id="search" placeholder="FILTRER LES ARTICLES..." 
                        class="w-full bg-zinc-950 border border-zinc-800 rounded-sm py-4 px-12 text-sm text-white focus:border-blue-600 outline-none transition-all">
             </div>
         </div>
     </header>
 
     <main class="container mx-auto py-12 px-6 max-w-6xl">
-        <div id="articles-container" class="grid gap-4"></div>
+        <div id="articles-container"></div>
     </main>
 
     <script>
         const ucmjDatabase = [
-            // BLOC 1-15 (PROCÉDURE)
-            { id: 1, cat: "Général", t: "Définitions", d: "Explication technique des rôles : Juge-Avocat (JAG), Officier Supérieur, Personnel Enrôlé." },
-            { id: 2, cat: "Général", t: "Juridiction des Personnes", d: "Liste exhaustive des individus sous juridiction UCMJ, incluant les civils accompagnant les forces en temps de guerre." },
-            { id: 7, cat: "Force", t: "Appréhension", d: "Cadre légal de l'arrestation. Définit la 'cause probable' nécessaire pour priver un membre de sa liberté." },
-            { id: 15, cat: "Sanction", t: "Article 15 (NJP)", d: "Sanctions non-judiciaires permettant de maintenir la discipline sans casier judiciaire permanent." },
+            // PARTIE 1 : GÉNÉRALITÉS ET PROCÉDURES
+            { id: 1, cat: "Général", t: "Définitions", d: "Établit les définitions légales pour les termes 'officier', 'juge-avocat', 'accusateur' et 'personnel enrôlé'." },
+            { id: 2, cat: "Général", t: "Juridiction", d: "Définit les personnes soumises à l'UCMJ : service actif, réservistes, retraités, prisonniers de guerre et civils en zone de combat." },
+            { id: 7, cat: "Force", t: "Appréhension", d: "Autorité légale pour arrêter un individu suspecté d'une infraction militaire sous 'cause probable'." },
+            { id: 8, cat: "Force", t: "Arrestation de déserteurs", d: "Délégation aux autorités civiles pour capturer et détenir les déserteurs de l'armée." },
+            { id: 9, cat: "Restriction", t: "Confinement et Restriction", d: "Procédure d'imposition de limites physiques ou de mise en cellule avant le procès." },
+            { id: 13, cat: "Droit", t: "Punition pré-procès", d: "Interdiction de punir ou d'humilier un suspect avant son jugement définitif par une cour martiale." },
+            { id: 15, cat: "Sanction", t: "Article 15 (NJP)", d: "Punitions non-judiciaires administrées par le commandement pour des infractions mineures sans procès." },
 
-            // BLOC 77-94 (INSUBORDINATION & ORDRES)
-            { id: 77, cat: "Responsabilité", t: "Auteurs principaux", d: "Toute personne qui aide, conseille ou commande un crime est traitée comme l'exécuteur." },
-            { id: 78, cat: "Responsabilité", t: "Complice après les faits", d: "Toute assistance pour éviter la capture ou la punition d'un auteur de crime." },
-            { id: 81, cat: "Complot", t: "Conspiration", d: "Accord entre deux personnes ou plus pour commettre un acte illégal." },
-            { id: 85, cat: "Désertion", t: "Désertion", d: "Abandon définitif ou pour éviter un devoir important (déploiement, combat)." },
-            { id: 86, cat: "Absence", t: "AWOL", d: "Absence sans autorisation officielle d'un lieu de service désigné." },
-            { id: 89, cat: "Insubordination", t: "Irrespect envers Officier", d: "Paroles, gestes ou mépris affiché envers la hiérarchie." },
-            { id: 90, cat: "Insubordination", t: "Agression d'un Supérieur", d: "Frapper un officier supérieur ou désobéissance volontaire à un ordre légal." },
-            { id: 92, cat: "Ordres", t: "Violation d'Ordre Général", d: "Manquement à une consigne écrite permanente ou à un règlement de base." },
-            { id: 94, cat: "Mutinerie", t: "Mutinerie / Sédition", d: "Refus collectif d'obéir ou tentative de renverser l'autorité militaire." },
-
-            // BLOC 95-110 (CRIMES DE GUERRE & COMBAT)
-            { id: 99, cat: "Combat", t: "Mauvaise conduite au combat", d: "Lâcheté, abandon de munitions ou de l'unité face à l'ennemi." },
-            { id: 101, cat: "Sécurité", t: "Usage de signaux / Codes", d: "Divulgation ou altération des mots de passe et codes de chiffrement." },
-            { id: 103, cat: "Guerre", t: "Biens capturés / Pillage", d: "Interdiction de s'approprier des butins de guerre pour un profit personnel." },
-            { id: 103a, cat: "Guerre", t: "Espionnage", d: "Collecte de données pour une puissance étrangère (passible de mort selon les cas)." },
-            { id: 104, cat: "Trahison", t: "Aide à l'ennemi", d: "Soutien logistique, financier ou informationnel direct à l'adversaire." },
-            { id: 105, cat: "Captivité", t: "Inconduite en tant que prisonnier", d: "Traiter cruellement ses camarades de cellule pour obtenir des faveurs de l'ennemi." },
-            { id: 106, cat: "Guerre", t: "Crimes de Guerre", d: "Violations graves des conventions internationales lors d'opérations armées." },
-
-            // BLOC 107-123 (FRAUDE & FALSIFICATION)
-            { id: 107, cat: "Mensonge", t: "Fausse déclaration officielle", d: "Mensonge écrit ou oral dans l'exercice des fonctions." },
-            { id: 108, cat: "Matériel", t: "Perte / Sabotage", d: "Destruction volontaire ou négligente de la propriété militaire." },
-            { id: 111, cat: "Véhicule", t: "Conduite avec facultés affaiblies", d: "Alcoolémie ou stupéfiants au contrôle d'un véhicule ou engin de guerre." },
-            { id: 112a, cat: "Drogue", t: "Substances contrôlées", d: "Possession, distribution ou usage de narcotiques (Héroïne, Cocaine, etc.)." },
-            { id: 113, cat: "Garde", t: "Manquement de Sentinelle", d: "S'endormir à son poste ou le quitter avant d'être relevé." },
-            { id: 118, cat: "Crime Sang", t: "Meurtre", d: "Homicide volontaire avec préméditation ou intention de nuire gravement." },
-            { id: 121, cat: "Vol", t: "Larceny", d: "Soustraction de propriété gouvernementale ou privée." },
-            { id: 122, cat: "Vol", t: "Braquage (Robbery)", d: "Vol avec usage de la force physique ou de la menace." },
-            { id: 123, cat: "Fraude", t: "Falsification", d: "Altérer sciemment des documents légaux, signatures ou ordres officiels." },
-            { id: 123a, cat: "Fraude", t: "Chèques sans provision", d: "Usage frauduleux d'instruments financiers." },
-
-            // BLOC 124-134 (VIOLENCE & GÉNÉRAL)
-            { id: 128, cat: "Violence", t: "Assault (Agression)", d: "Tentative ou exécution de violence physique contre autrui." },
-            { id: 131, cat: "Justice", t: "Parjure", d: "Mentir délibérément sous serment devant une cour martiale." },
-            { id: 131b, cat: "Justice", t: "Obstruction à la justice", d: "Influencer un témoin ou détruire des preuves d'enquête." },
-            { id: 132, cat: "Fraude", t: "Falsification de réclamations", d: "Fraude aux indemnités ou aux salaires gouvernementaux." },
-            { id: 133, cat: "Honneur", t: "Conduite d'Officier", d: "Actes déshonorants pour un officier et un gentleman." },
-            { id: 134, cat: "Général", t: "Article Général", d: "Désordres non spécifiés : Adultère, dettes, comportement nuisant à l'image des forces." },
-
-            // RAJOUTS RÉCENTS (ADMIN & RECOURS)
-            { id: 138, cat: "Recours", t: "Plainte contre Supérieur", d: "Droit légal de signaler un acte injuste commis par un commandant." },
-            { id: 139, cat: "Civil", t: "Dommages aux civils", d: "Procédure de saisie sur solde pour réparer des dégâts causés aux biens civils." },
-            { id: 146, cat: "Général", t: "Clause de Sévérité", d: "Application stricte des peines maximales en temps de guerre." }
+            // PARTIE 2 : ARTICLES PUNITIFS (LA LISTE NOIRE)
+            { id: 77, cat: "Responsabilité", t: "Auteurs principaux", d: "Toute personne qui commet, aide, ordonne ou conseille un crime est tenue pour responsable au même titre que l'exécuteur." },
+            { id: 78, cat: "Responsabilité", t: "Complice après les faits", d: "Assistance volontaire fournie à un criminel pour entraver sa capture, son procès ou sa punition." },
+            { id: 80, cat: "Tentative", t: "Tentative", d: "Acte concret entrepris avec l'intention de commettre un crime, même si celui-ci n'est pas mené à son terme." },
+            { id: 81, cat: "Complot", t: "Conspiration", d: "Accord entre deux personnes ou plus pour commettre un crime, suivi d'un acte extérieur pour le réaliser." },
+            { id: 82, cat: "Incitations", t: "Sollicitation", d: "Le fait de commander, demander ou inciter autrui à déserter, à se mutiner ou à commettre une sédition." },
+            { id: 83, cat: "Fraude", t: "Engagement Frauduleux", d: "Obtenir un enrôlement ou une nomination par des déclarations sciemment fausses ou par dissimulation." },
+            { id: 85, cat: "Désertion", t: "Désertion", d: "Abandonner son unité avec l'intention de ne pas revenir, ou fuir pour éviter un service important ou périlleux." },
+            { id: 86, cat: "Absence", t: "AWOL (Absence sans congé)", d: "Manquement à se présenter à son poste ou départ d'une unité sans autorisation officielle." },
+            { id: 87, cat: "Absence", t: "Manquement au mouvement", d: "Manquer délibérément ou par négligence le départ d'un navire, avion ou convoi militaire." },
+            { id: 88, cat: "Politique", t: "Mépris des officiels", d: "Utilisation de paroles méprisantes envers le Président, le Congrès ou les secrétaires d'État." },
+            { id: 89, cat: "Insubordination", t: "Irrespect envers Officier", d: "Comportement insultant, gestes déplacés ou paroles irrespectueuses envers un officier supérieur." },
+            { id: 90, cat: "Insubordination", t: "Agression/Désobéissance", d: "Frapper un officier supérieur ou désobéir volontairement à un ordre légal et direct." },
+            { id: 91, cat: "Insubordination", t: "Insubordination NCO", d: "Refus d'obéissance ou comportement méprisant envers un sous-officier ou un adjudant." },
+            { id: 92, cat: "Ordres", t: "Violation d'Ordre", d: "Infraction consistant à ne pas obéir à un règlement général, un ordre permanent ou à manquer à ses devoirs." },
+            { id: 93, cat: "Abus", t: "Cruauté et Mauvais traitements", d: "Abus d'autorité, oppression ou cruauté physique/mentale exercée sur un subordonné." },
+            { id: 94, cat: "Mutinerie", t: "Mutinerie et Sédition", d: "Révolte collective armée ou refus groupé d'obéir à l'autorité militaire." },
+            { id: 95, cat: "Évasion", t: "Résistance à l'arrestation", d: "Opposition physique lors d'une interpellation ou évasion d'une zone de garde à vue." },
+            { id: 99, cat: "Combat", t: "Lâcheté au combat", d: "Mauvaise conduite, fuite, ou abandon d'armes et de munitions devant l'adversaire." },
+            { id: 101, cat: "Sécurité", t: "Divulgation de Codes", d: "Trahison ou usage illégal de mots de passe, signaux et codes de chiffrement." },
+            { id: 104, cat: "Trahison", t: "Aide à l'ennemi", d: "Donner des renseignements, des vivres ou un soutien logistique à une force adverse." },
+            { id: 106, cat: "Guerre", t: "Espionnage", d: "Collecte secrète d'informations stratégiques au profit d'une puissance étrangère." },
+            { id: 107, cat: "Mensonge", t: "Fausse déclaration officielle", d: "Signer un faux document ou mentir lors d'une déclaration officielle avec intention de tromper." },
+            { id: 108, cat: "Matériel", t: "Sabotage / Perte de biens", d: "Vendre, endommager ou perdre par négligence du matériel appartenant au gouvernement." },
+            { id: 109, cat: "Matériel", t: "Destruction biens privés", d: "Détérioration volontaire ou pillage de biens appartenant à des civils." },
+            { id: 111, cat: "Véhicule", t: "Ivresse au volant", d: "Opérer un véhicule, navire ou aéronef avec des facultés affaiblies par l'alcool ou la drogue." },
+            { id: 112, cat: "Service", t: "Ivresse au service", d: "Être ivre ou sous l'emprise de stupéfiants lors d'un tour de garde ou d'une mission." },
+            { id: 112a, cat: "Drogue", t: "Stupéfiants", d: "Possession, distribution, fabrication ou usage de drogues illicites (cocaïne, héroïne, marijuana, etc.)." },
+            { id: 113, cat: "Garde", t: "Faute de Sentinelle", d: "Sentinelle trouvée endormie, ivre ou ayant quitté son poste sans être relevée." },
+            { id: 118, cat: "Crime Sang", t: "Meurtre", d: "Homicide volontaire prémédité ou intention d'infliger des blessures mortelles." },
+            { id: 121, cat: "Vol", t: "Larceny (Vol simple)", d: "Soustraction illégale de propriété avec intention d'en priver le propriétaire." },
+            { id: 122, cat: "Vol", t: "Braquage (Robbery)", d: "Vol commis par la force ou par intimidation en présence de la victime." },
+            { id: 123, cat: "Fraude", t: "Falsification (Forgery)", d: "Création ou altération de documents officiels ou signatures pour frauder." },
+            { id: 123a, cat: "Fraude", t: "Chèques sans provision", d: "Émission de chèques frauduleux en sachant que les fonds sont insuffisants." },
+            { id: 128, cat: "Violence", t: "Assault (Agression)", d: "Tentative d'infliger une violence corporelle ou exécution de coups et blessures." },
+            { id: 131, cat: "Justice", t: "Parjure", d: "Faire sciemment une fausse déclaration sous serment lors d'une procédure judiciaire." },
+            { id: 131a, cat: "Justice", t: "Subornation de parjure", d: "Inciter ou forcer une autre personne à commettre un parjure." },
+            { id: 131b, cat: "Justice", t: "Obstruction à la justice", d: "Entraver une enquête, influencer un témoin ou détruire des preuves physiques." },
+            { id: 132, cat: "Fraude", t: "Fraude gouvernementale", d: "Falsification de réclamations de paiement ou d'indemnités militaires." },
+            { id: 133, cat: "Honneur", t: "Conduite d'Officier", d: "Actes déshonorants qui ternissent le statut d'officier et de gentleman." },
+            { id: 134, cat: "Général", t: "Article Général", d: "Désordres non listés : Adultère, dettes, comportement nuisant à la discipline ou au bon ordre." },
+            { id: 138, cat: "Recours", t: "Plainte pour tort", d: "Procédure permettant de signaler officiellement un grief contre un commandant." }
         ];
 
         const container = document.getElementById('articles-container');
@@ -103,43 +105,42 @@
             container.innerHTML = '';
             data.forEach(a => {
                 const card = document.createElement('div');
-                card.className = "article-card p-5 cursor-pointer flex flex-col gap-4";
-                card.onclick = () => card.querySelector('.details').classList.toggle('content-hidden');
-
+                card.className = "article-card";
                 card.innerHTML = `
-                    <div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+                    <div class="flex justify-between items-center">
                         <div class="flex items-center gap-5">
-                            <span class="font-mono text-blue-500 font-bold text-lg opacity-80">#${a.id}</span>
+                            <span class="font-mono text-blue-500 font-bold text-lg">#${a.id}</span>
                             <div>
                                 <h3 class="text-white font-bold uppercase tracking-widest text-sm">${a.t}</h3>
-                                <div class="flex items-center gap-2 mt-1">
-                                    <span class="category-tag">${a.cat}</span>
-                                    <span class="text-[9px] text-zinc-600 font-mono tracking-tighter uppercase">Secured File // Div Z</span>
-                                </div>
+                                <span class="category-tag mt-1 inline-block">${a.cat}</span>
                             </div>
                         </div>
-                        <div class="text-zinc-700 text-[10px] uppercase font-bold flex items-center gap-2">
-                            <span>Dossier</span>
-                            <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-down text-zinc-700"></i>
+                    </div>
+                    <div class="details">
+                        <p class="italic">"${a.d}"</p>
+                        <div class="mt-4 flex gap-2">
+                            <span style="font-size:8px;" class="text-zinc-600 border border-zinc-800 px-2 py-1 uppercase">Zancudo Restricted File</span>
                         </div>
                     </div>
-                    <div class="details content-hidden pt-6 border-t border-zinc-900">
-                        <p class="text-zinc-400 text-sm leading-relaxed italic border-l-2 border-blue-600 pl-4">
-                            "${a.d}"
-                        </p>
-                    </div>
                 `;
+                card.onclick = () => {
+                    const d = card.querySelector('.details');
+                    d.classList.toggle('show');
+                };
                 container.appendChild(card);
             });
         }
 
-        searchInput.addEventListener('input', (e) => {
-            const v = e.target.value.toLowerCase();
-            const f = ucmjDatabase.filter(x => 
-                x.t.toLowerCase().includes(v) || x.id.toString().includes(v) || x.cat.toLowerCase().includes(v)
+        searchInput.oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = ucmjDatabase.filter(x => 
+                x.t.toLowerCase().includes(val) || 
+                x.id.toString().includes(val) || 
+                x.cat.toLowerCase().includes(val)
             );
-            render(f);
-        });
+            render(filtered);
+        };
 
         render(ucmjDatabase);
     </script>
